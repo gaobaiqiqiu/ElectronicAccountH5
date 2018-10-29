@@ -210,17 +210,29 @@
 			verificationP.style.display = 'block';
 
 
+			var reqData = {
+				"shjihaom": '13681497126', //手机号
+				"currentBusinessCode": ''
+			};
+
+			apiSend('post', 'elesGetMobileCode.do', reqData, vertifyFun, vertifyerrFun, true);
+			// function checkInp(data) {
+			// 	console.log('成功');
+			// }
+
+
+
 			//校验
 			//if(checknull(loginPwd.value, "登录密码")) {
 			//if(checknull(confirmPwd.value, "确认密码")) {
 			//if(checkupdpsd(pwd, pwd1)) {
-			if (checkphone(mobileNo.value)) {  //mobileNo需要动态获取
+			// if (checkphone(mobileNo.value)) {  //mobileNo需要动态获取
 				//ajax
 				//apiSend('post', 'getMobileValueCodeNoSession.do', reqData, vertifyFun, vertifyerrFun, true);
 				//}
 				//}
 				//}
-			};
+			// };
 		})
 
 		//验证码成功
@@ -288,7 +300,7 @@
 			//if(checknull(loginPwd.value, "登录密码")) {
 			//if(checknull(confirmPwd.value, "确认密码")) {
 			//if(checkupdpsd(pwd, pwd1)) {
-			if (checkphone(mobileNo.value)) {  //mobileNo需要动态获取
+			// if (checkphone(mobileNo.value)) {  //mobileNo需要动态获取
 				if (!tFlag) {
 					plus.nativeUI.toast("请先点击按钮获取验证码");
 					return false;
@@ -302,7 +314,7 @@
 					//}
 					//}
 				}
-			};
+			// };
 		});
 
 		//设置密码成功

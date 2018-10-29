@@ -311,7 +311,7 @@
 
 			//银行卡
 			// var reqData = {
-			// 	"fileInputName": 'filePathName1',
+			// 	"fileInputName": 'filePathName4',
 			// 	"baseStr": baseStr,
 			// 	"tranType": "0",
 			// 	"certNo": "410101197801010074",
@@ -320,15 +320,11 @@
 			// }
 			// apiSend('post', 'eleAccAppUpLoadImage.do', reqData, checkInp, null, true);
 
-
+			// function checkInp(data) {
+			// 	console.log('成功');
+			// }
 			
 		}
-
-		// certNo.onblur = function(){
-		// 	if (isCardID(certNo.value)) {
-
-		// 	}
-		// }
 
 
 		//下一步
@@ -348,13 +344,11 @@
 				"userName":'欧阳于一',
 			}
 			// apiSend('post', 'eleAccAppCheckFace.do', reqData, checkInp, null, true);
-			apiSend('post', 'eleAccAppOnlineCheck.do', reqData, checkInp, null, true);
+			apiSend('post', 'eleAccAppOnlineCheck.do', reqData, faceFun, null, true);
 
-			function checkInp(data) {
-				console.log('成功');
-			}
-
-
+			// function checkInp(data) {
+			// 	console.log('成功');
+			// }
 
 
 

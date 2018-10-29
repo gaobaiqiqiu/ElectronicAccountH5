@@ -36,31 +36,92 @@
 		// mui.plusReady(function () {
 		// 	regist.init();
 		// })
-		
-		
-        $("#nextPage").click(function(){
-            // window.location.href = "http://60.10.20.25:86/elapp/index.html";
-             var reqData = {
-				"idNo": "130823198010285036"
-            };
-            $.ajax({
+
+
+		$("#nextPage").click(function () {
+			// window.location.href = "http://60.10.20.25:86/elapp/index.html";
+			// var reqData = {
+			// 	"timeStamp": '20181029141951',
+			// 	"userData": '{\"ip\":\"127.0.0.1\",\"version_num\":\"0.0.1\"}',
+			// 	"idName": '李国立',
+			// 	"signature": '',
+			// 	"requestId": '20181029141951959403',
+			// 	"appId": '001',
+			// 	"interfaceId": 'acctOpen',
+			// 	"applicationId": '00',
+			// 	"appChaId": '0001',
+			// 	"version": '1.0',
+			// 	"idNo": '',
+			// 	"url": 'http://localhost:8180/index?tokenId=null&enterpriseName=null'
+			// };
+
+			// var reqData = {
+			// 	"timeStamp": '20181029141951',
+			// 	// "userData": '{\"ip\":\"127.0.0.1\",\"version_num\":\"0.0.1\"}'
+			// 	"idName": '李国立',
+			// 	"signature": '123',
+			// 	"requestId": '20181029141951959403',
+			// 	"appId": '001',
+			// 	"interfaceId": 'acctOpen',
+			// 	"applicationId": '00',
+			// 	"appChaId": '0001',
+			// 	"version": '1.0',
+			// 	"idNo": '141023199301250028',
+			// 	"url": 'http://localhost:8180/index?tokenId=null&enterpriseName=null'
+			// };
+
+			// var reqS = {
+			// 	"id":"08",
+			// 	"osType":"aaa",
+			// 	"uuid":"Uss",
+			// 	"imei":"sssx",
+			// 	"Mac":"wwwq",
+			// 	"address":"tttq",
+			// 	"lat":"yyh",
+			// 	"long":"weqw",
+			// 	"platform":"weqwe",
+			// 	"version_num":"qweqwe"
+			// }
+
+			var reqData = {
+				"requestId": '01',
+				"appId": '02',
+				"appChaId": '03',
+				"interfaceId": '04',
+				"applicationId": '05',
+				"version": '06',
+				"timeStamp": '20181026214850',
+				"userData": "{'id':'08','osType':'aaa','uuid':'Uss','imei':'sssx','Mac':'wwwq','address':'tttq','lat':'yyh',"
+				+"'long':'weqw','platform':'weqwe','version_num':'qweqwe'}",
+				"openId":'sg',
+				"idName": '孟令聪',
+				"idNo": '230904199308121318',
+				"bindCard":'6798752666666666',
+				"bindTele":'15210026151',
+				"signature": 'laROrzxk9OkRF+DX+QOO9GkmY4D6Q6Y/BPKpM8PB/+xH4jZpa6G0lGi4Y7Ok6O98eLBxhUGl8/dYyvaoVEPU4d21roQDXlkkAwEW/FK2a4jAvxBdwjzmPrlNJh7VKcdCfkPB7wbcURyYGJYjY96cRTLOhrZoNa//6nKzcpVg8pfpTG7dtBfEA15FWsZ/ZjoqV6a7QJ47aU8Mg+PpGPHt9CRE/ausbHkRU97CDL1pGlGpiPpSwLvVDJs1JsD1xtZryi5EBdjPqxDUfJwFXmIYzHY2ew3Yt9LUOoMnktaUcuGhdNqR5yZqYHbp+NWdHEtzBrjj4EqtzIJzjBr91gs08A=='
+			};
+			$.ajax({
 				type: "post",
 				url: "http://60.10.20.25:86/elapp/acctOpen.do",
-                dataType: "jsonp", //以键/值对的形式
-                data: reqData,
+				dataType: "jsonp", //以键/值对的形式
+				data: reqData,
 				async: true,
 				success: function (data) {
-                    console.log(data);
+					console.log(data);
+				},
+				error: function (data) {
+					console.log(data);
+					console.log("异步请求失败");
 				}
 			})
 
 			// apiSend('post', 'acctOpen.do', reqData, faceFun, null, true);
-        })
-        
-        function faceFun(result) {
+		})
+
+		function faceFun(result) {
 			console.log(121212121);
 		}
-       
+
 
 
 	</script>
