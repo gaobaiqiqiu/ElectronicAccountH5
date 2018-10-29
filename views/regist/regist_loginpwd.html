@@ -1,0 +1,402 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>设置交易密码</title>
+	<meta http-equiv="Access-Control-Allow-Origin" content="*">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no ,viewport-fit=cover" />
+	<link href="../../css/mui.css" rel="stylesheet" />
+	<link href="../../css/home.css" rel="stylesheet" />
+	<link rel="stylesheet" href="../../css/microdone-h5.css" />
+	<link rel="stylesheet" href="../../css/demo.css" />
+	<link rel="stylesheet" href="http://at.alicdn.com/t/font_889368_kzv7sb7gih.css">
+	<!--<link href="../../css/bank.css" rel="stylesheet">
+		<link href="../../css/rljf.css" rel="stylesheet">-->
+</head>
+<style>
+	/*select {
+    		direction: rtl;
+    		
+		}*/
+		/*select option {
+ 		   direction: ltr;
+		}*/
+		select{
+			float: left;
+		}
+		.contentDv{
+			background-color: #ffffff;
+			margin: 0.2rem auto 0;
+		}
+		.professional,
+		.addressType,
+		.address,
+		.use{
+			height: 50px;
+			line-height: 50px;
+			position: relative;
+		}
+		.professional_sp{
+			width: 35%;
+			text-align: left;
+			float: left;
+			padding-left: 26px;
+		}
+		.professional_inp{
+			height: 50px;
+			width: 65%;
+			float: left;
+			position: relative;
+		}
+		.professional_inp span{
+			height: 100%;
+			width: 80%;
+    		display: block;
+			text-align: right;
+			overflow: hidden;
+		}
+		.professional_inp input{
+			height: 50px;
+    		padding: 0;
+			margin: 0;
+			background: none;
+			border: 0;
+			text-align: right;
+		}
+		.professional_inp i{
+			font-size: 1.2rem;
+			position: absolute;
+			top: 0;
+			right: 1rem;
+		}
+		.professional_ul{
+			width: 90%;
+			position: absolute;
+			top: 3rem;
+    		right: 2rem;
+			z-index: 100;
+			display: none;
+			background-color: aliceblue;
+		}
+		.professional_ul li{
+			font-family: "微软雅黑"!important;
+			height: 2.5rem;
+    		line-height: 2.5rem;
+			font-weight: 400;
+			color: #000000;
+			padding-right: 0.5rem;
+			border-bottom: 1px solid #ccc;
+			text-align: right;
+		}
+		/* 交易密码 */
+		/* #tradePwd{
+			text-align: right;
+		} */
+		#loginPwd{
+			text-align: right;
+		}
+		/* 确认密码 */
+		#confirmPwd{
+			text-align: right;
+		}
+		/* 验证码 */
+		#verificationP{
+			padding-left: 20px;
+			padding-bottom: 5px;
+			font-size: 15px;
+			display: none;
+		}
+		#verificationP span{
+			color: red;
+		}
+		/* 协议*/
+		.agreementLa{
+			padding-left: 20px;
+			padding-top: 7px;
+    		font-size: 15px;
+		}
+		.agreementLa input{
+			height: 15px;
+			width: 15px;
+		}
+		.agreementLa span{
+			color: red;
+		}
+	</style>
+<script type="text/javascript" src="../../js/controllers/regist/demo.js"></script>
+<script type="text/javascript" src="../../js/controllers/regist/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="../../js/controllers/regist/microdoneH5.js"></script>
+<script type="text/javascript">
+	var kb = new keyBoard({
+		"chaosMode": 0, // 混乱模式,0:无混乱;1:打开时乱一次;2:每输入一个字符乱一次,默认值0
+		"pressStatus": 1, // 按键状态,0:按下、抬起按键无变化;1:按下、抬起按键的颜色变化,默认值0
+		"kbType": 0, // 键盘类型,0:全键盘;1:纯数字键盘,默认值0
+		"svg": "../../images/svg",//svg图片的地址
+		"hasMap": "1",//是否调用mapping值：当为1时调用，当为非1时，不调用
+		"license": "SjgzTXJ3RU4vZXcxZ3hpdjBSb093TFNhaTBSaFROSE9WWHlMUXQxelRlL0VRMnRRb0d6a3FTTXlWZVZXYXRGS1NuMW51Wk9jWURDdkZQU3RhbnhZTisvUTN1NjBabStWU3Y0NTNzNDlCa3djd0QxeXNmQnJReXVpc3NCbWFzYmh5YklJSUhlbFN3bzk2T2s3UWF1RDllQ3krUDZ2dmJJbHRhT1VCdHF1NXpFPXsiaWQiOjAsInR5cGUiOiJ0ZXN0IiwicGxhdGZvcm0iOjEwLCJub3RiZWZvcmUiOiIyMDE4MDgwMSIsIm5vdGFmdGVyIjoiMjAxODExMDEifQ=="
+	});
+	passGuard.mapArr = "Wyc0MycsICc1NycsICc3MScsICcxMjEnLCAnMTI2JywgJzEyNCcsICc5MCcsICcxMTInLCAnODknLCAnOTMnLCAnMTA1JywgJzgxJywgJzExMycsICcxMjUnLCAnNjgnLCAnMzgnLCAnODUnLCAnNjUnLCAnMTE4JywgJzgwJywgJzg3JywgJzkxJywgJzQ0JywgJzMzJywgJzc4JywgJzg4JywgJzk2JywgJzEwOScsICc2MScsICc2NicsICc0MCcsICc4MicsICc3MicsICcxMjAnLCAnOTUnLCAnMTEwJywgJzQ2JywgJzg2JywgJzEwNycsICc1MCcsICc3MCcsICc5OCcsICcxMTcnLCAnMzYnLCAnMTAxJywgJzgzJywgJzQ4JywgJzExNCcsICc2NycsICc3NycsICcxMDgnLCAnMTAwJywgJzM1JywgJzczJywgJzY5JywgJzk5JywgJzEwMicsICc3NicsICc3NScsICcxMDQnLCAnNDknLCAnOTInLCAnNjInLCAnNTgnLCAnNTMnLCAnNzknLCAnOTcnLCAnNDUnLCAnNDEnLCAnMTE5JywgJzEyMycsICc1MScsICc2MycsICc0NycsICcxMDYnLCAnMzknLCAnMTExJywgJzExNScsICczNCcsICc5NCcsICcxMjInLCAnNjQnLCAnNTknLCAnMTE2JywgJzM3JywgJzc0JywgJzU1JywgJzYwJywgJzU0JywgJzUyJywgJzQyJywgJzg0JywgJzEwMycsICc1Nidd";
+	var passGuard1 = new passGuard(
+		{
+			"mappurl": "Wyc0MycsICc1NycsICc3MScsICcxMjEnLCAnMTI2JywgJzEyNCcsICc5MCcsICcxMTInLCAnODknLCAnOTMnLCAnMTA1JywgJzgxJywgJzExMycsICcxMjUnLCAnNjgnLCAnMzgnLCAnODUnLCAnNjUnLCAnMTE4JywgJzgwJywgJzg3JywgJzkxJywgJzQ0JywgJzMzJywgJzc4JywgJzg4JywgJzk2JywgJzEwOScsICc2MScsICc2NicsICc0MCcsICc4MicsICc3MicsICcxMjAnLCAnOTUnLCAnMTEwJywgJzQ2JywgJzg2JywgJzEwNycsICc1MCcsICc3MCcsICc5OCcsICcxMTcnLCAnMzYnLCAnMTAxJywgJzgzJywgJzQ4JywgJzExNCcsICc2NycsICc3NycsICcxMDgnLCAnMTAwJywgJzM1JywgJzczJywgJzY5JywgJzk5JywgJzEwMicsICc3NicsICc3NScsICcxMDQnLCAnNDknLCAnOTInLCAnNjInLCAnNTgnLCAnNTMnLCAnNzknLCAnOTcnLCAnNDUnLCAnNDEnLCAnMTE5JywgJzEyMycsICc1MScsICc2MycsICc0NycsICcxMDYnLCAnMzknLCAnMTExJywgJzExNScsICczNCcsICc5NCcsICcxMjInLCAnNjQnLCAnNTknLCAnMTE2JywgJzM3JywgJzc0JywgJzU1JywgJzYwJywgJzU0JywgJzUyJywgJzQyJywgJzg0JywgJzEwMycsICc1Nidd",//此处为了前端演示而屏蔽了，正常开发中需要此参数，该地址由后台人员提供
+			"fixed": "H5fixed",//当fixed接口添加时，代表该输入框在fixed覆盖层上且覆盖层的ID为接口的值(在demo中覆盖层ID为"H5fixed")
+			"maxLength": 12, // 最大输入长度
+			"regExp1": "[\\S\\s]", // 输入过程限制的正则
+			"regExp2": "[\\S\\s]{6,12}",
+			"displayMode": 0, // 显示形式,0:星号;1:明文,默认值0
+			"callBack": cb1, //成功回调
+			"errorCallBack": cb2, //失败回调
+			"focus": inputFocus1,//H5键盘获取焦点回调
+			"blur": inputBlur1,//H5键盘失去焦点回调
+			"rsaPublicKey": "3081890281810092d9d8d04fb5f8ef9b8374f21690fd46fdbf49b40eeccdf416b4e2ac2044b0cfe3bd67eb4416b26fd18c9d3833770a526fd1ab66a83ed969af74238d6c900403fc498154ec74eaf420e7338675cad7f19332b4a56be4ff946b662a3c2d217efbe4dc646fb742b8c62bfe8e25fd5dc59e7540695fa8b9cd5bfd9f92dfad009d230203010001" // rsa公钥
+		});
+	var passGuard2 = new passGuard(
+		{
+			"mappurl": "Wyc0MycsICc1NycsICc3MScsICcxMjEnLCAnMTI2JywgJzEyNCcsICc5MCcsICcxMTInLCAnODknLCAnOTMnLCAnMTA1JywgJzgxJywgJzExMycsICcxMjUnLCAnNjgnLCAnMzgnLCAnODUnLCAnNjUnLCAnMTE4JywgJzgwJywgJzg3JywgJzkxJywgJzQ0JywgJzMzJywgJzc4JywgJzg4JywgJzk2JywgJzEwOScsICc2MScsICc2NicsICc0MCcsICc4MicsICc3MicsICcxMjAnLCAnOTUnLCAnMTEwJywgJzQ2JywgJzg2JywgJzEwNycsICc1MCcsICc3MCcsICc5OCcsICcxMTcnLCAnMzYnLCAnMTAxJywgJzgzJywgJzQ4JywgJzExNCcsICc2NycsICc3NycsICcxMDgnLCAnMTAwJywgJzM1JywgJzczJywgJzY5JywgJzk5JywgJzEwMicsICc3NicsICc3NScsICcxMDQnLCAnNDknLCAnOTInLCAnNjInLCAnNTgnLCAnNTMnLCAnNzknLCAnOTcnLCAnNDUnLCAnNDEnLCAnMTE5JywgJzEyMycsICc1MScsICc2MycsICc0NycsICcxMDYnLCAnMzknLCAnMTExJywgJzExNScsICczNCcsICc5NCcsICcxMjInLCAnNjQnLCAnNTknLCAnMTE2JywgJzM3JywgJzc0JywgJzU1JywgJzYwJywgJzU0JywgJzUyJywgJzQyJywgJzg0JywgJzEwMycsICc1Nidd",//此处为了前端演示而屏蔽了，正常开发中需要此参数，该地址由后台人员提供
+			"fixed": "H5fixed",//当fixed接口添加时，代表该输入框在fixed覆盖层上且覆盖层的ID为接口的值(在demo中覆盖层ID为"H5fixed")
+			"maxLength": 12, // 最大输入长度
+			"regExp1": "[\\S\\s]", // 输入过程限制的正则
+			"regExp2": "[\\S\\s]{6,12}",
+			"displayMode": 0, // 显示形式,0:星号;1:明文,默认值0
+			"callBack": cb3, //成功回调
+			"errorCallBack": cb4, //失败回调
+			"focus": inputFocus2,//H5键盘获取焦点回调
+			"blur": inputBlur2,//H5键盘失去焦点回调
+			"rsaPublicKey": "3081890281810092d9d8d04fb5f8ef9b8374f21690fd46fdbf49b40eeccdf416b4e2ac2044b0cfe3bd67eb4416b26fd18c9d3833770a526fd1ab66a83ed969af74238d6c900403fc498154ec74eaf420e7338675cad7f19332b4a56be4ff946b662a3c2d217efbe4dc646fb742b8c62bfe8e25fd5dc59e7540695fa8b9cd5bfd9f92dfad009d230203010001" // rsa公钥
+		});
+	//		var passGuard1 = new passGuard(
+	//		{
+	//			"jump": 1, //是否用添加删除回调：1代表使用，0代表不使用
+	//			"add": tianjia, //输入框值添加回调,当jump为1时，才有回调
+	//			"del": jianshao, //输入框值减少回调,当jump为1时，才有回调
+	////			"mappurl" : "./send_mapping.jsp",
+	//			"fixed":"H5fixed",//当fixed接口添加时，代表该输入框在fixed覆盖层上且覆盖层的ID为接口的值(在demo中覆盖层ID为"H5fixed")
+	//			"maxLength" : 12, // 最大输入长度
+	//			"regExp1" : "[\\S\\s]", // 输入过程限制的正则
+	//			"regExp2" : "[\\S\\s]{6,12}",
+	//			"displayMode" : 0, // 显示形式,0:星号;1:明文,默认值0
+	//			"callBack" : cb1, //成功回调
+	//			"errorCallBack" : cb2, //失败回调
+	//			"focus":inputFocus1,//H5键盘获取焦点回调
+	//		    "blur":inputBlur1,//H5键盘失去焦点回调
+	//			"rsaPublicKey" : "3081890281810092d9d8d04fb5f8ef9b8374f21690fd46fdbf49b40eeccdf416b4e2ac2044b0cfe3bd67eb4416b26fd18c9d3833770a526fd1ab66a83ed969af74238d6c900403fc498154ec74eaf420e7338675cad7f19332b4a56be4ff946b662a3c2d217efbe4dc646fb742b8c62bfe8e25fd5dc59e7540695fa8b9cd5bfd9f92dfad009d230203010001" // rsa公钥
+	//			});
+	function cb1() {
+		console.log("passGuard1输入的密码匹配");
+	}
+	function cb2() {
+		console.log("passGuard1输入的密码不匹配");
+	}
+	function cb3() {
+		console.log("passGuard2输入的密码匹配regExp2");
+	}
+	function cb4() {
+		console.log("passGuard2输入的密码不匹配regExp2");
+	}
+	function inputFocus1() {
+		console.log("passGuard1输入框获得焦点");
+	}
+	function inputBlur1() {
+		console.log("passGuard1输入框失去焦点");
+	}
+	function inputFocus2() {
+		console.log("passGuard1输入框获得焦点");
+	}
+	function inputBlur2() {
+		console.log("passGuard1输入框失去焦点");
+	}
+	// function tianjia(xh) { //xh为密码的长度
+	// 	$(".kb3>li").eq(xh - 1).append($("<p class='yuan'></p>"));
+	// 	if (xh == 6) {
+	// 		kb.hide();
+	// 	}
+	// }
+	// function jianshao(xh) {
+	// 	$(".kb3>li").eq(xh).html("");
+	// }
+	//提交方法
+	function sb() {
+		//判断密码长度
+		if (passGuard1.getLength() == 0) {
+			alert("密码不能为空！");
+			return false;
+		}
+		//			 $.ajax( {
+		//				url : "./send_randkey.jsp?" + get_time(),
+		//				type : "GET",
+		//				async : false,
+		//				success : function(ranKey) {
+		//					passGuard1.setRandKey(ranKey);//设置随机数
+		//				}
+		//			});
+		passGuard1.setRandKey('12345678901234567890123456789012');//设置随机数
+		//获取密文
+		$("#password").val(passGuard1.getOutput());
+		console.log("密码" + $("#password").val());
+
+		//提交
+		document.form1.action = "aaa"
+		document.form1.submit();
+	}
+
+</script>
+
+<body>
+	<header class="mui-bar mui-bar-nav statusbar" style="height: 2.8rem;">
+		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		<h1 class="mui-title" style="font-size:1rem">设置登录密码</h1>
+	</header>
+	<div class="mui-content" style="padding-top: 2.85rem;">
+		<div class="contentDv">
+			<!-- 职业 -->
+			<div class="professional">
+				<span class="professional_sp">职业</span>
+				<div class="professional_inp">
+					<span id="professionalId">国家机关、党群组织、企业、事业单位负责人</span>
+					<i class="iconfont icon-angle-down"></i>
+				</div>
+				<ul class="professional_ul">
+					<li>国家机关、党群组织、企业、事业单位负责人</li>
+					<li>生产、运输设备操作人员及有关人员</li>
+					<li>农、林、牧、渔、水利业生产人员</li>
+					<li>不便分类的其他从业人员</li>
+					<li>商业、服务业人员</li>
+					<li>专业技术人员</li>
+					<li>自由职业</li>
+					<li>家庭主妇</li>
+					<li>军人</li>
+					<li>学生</li>
+					<li>退休</li>
+				</ul>
+			</div>
+			<!-- 地址类型 -->
+			<div class="addressType">
+				<span class="professional_sp">地址类型</span>
+				<div class="professional_inp">
+					<span id="addressTypeId">住宅地址</span>
+					<i class="iconfont icon-angle-down"></i>
+				</div>
+				<ul class="professional_ul">
+					<li>住宅地址（信用卡专用）</li>
+					<li>单位地址（信用卡专用）</li>
+					<li>单位全称（信用卡专用）</li>
+					<li>单位地址（外汇专用）</li>
+					<li>联系（通讯）地址</li>
+					<li>信用卡账单地址</li>
+					<li>综合账单地址</li>
+					<li>住宅地址</li>
+					<li>英文地址</li>
+					<li>营业地址</li>
+					<li>注册地址</li>
+				</ul>
+			</div>
+			<!-- 详细地址 -->
+			<div class="address">
+				<span class="professional_sp">详细地址</span>
+				<div class="professional_inp">
+					<!-- <input id="mobileNo" type="text" class="w30" placeholder="请输入详细地址"> -->
+					<input id="addressD" style="padding-right: 3rem" type="text" class="w30" placeholder="请输入详细地址">
+				</div>
+			</div>
+			<!-- 用途 -->
+			<div class="use">
+				<span class="professional_sp">用途</span>
+				<div class="professional_inp">
+					<span id="useId">代发工资</span>
+					<i class="iconfont icon-angle-down"></i>
+				</div>
+				<ul class="professional_ul">				
+					<li>处理日常收支</li>
+					<li>社保医疗</li>
+					<li>投资理财</li>
+					<li>偿还贷款</li>
+					<li>代发工资</li>
+					<li>储蓄</li>
+					<li>其他</li>
+				</ul>
+			</div>
+		</div>
+		<form class="mui-input-group form_item" style="margin-top: 0.3rem;">
+			<div class="mui-input-row form_list">
+				<label>交易密码</label>
+				<!-- <input id="tradePwd" maxlength="6" readonly="readonly" type="text" class="w30 default NoneInput90" placeholder="6-20位数字和字母组合密码"> -->
+				<input id="loginPwd" maxlength="6" readonly="readonly" type="text" class="w30 default NoneInput90" style="padding-right: 3rem" placeholder="6-20位数字和字母组合密码">
+				<script>
+					//初始化密码卫士,绑定键盘对象。数字参数：0代表全键盘，1代表数字键盘
+					passGuard1.generate("loginPwd", kb, "passGuard1", 1);
+					//passGuard1.generate("kb1",kb,passGuard1,0);
+				</script>
+			</div>
+			<div class="mui-input-row form_list">
+				<label>确认密码</label>
+				<input id="confirmPwd" maxlength="6" readonly="readonly" type="text" class="w30  default NoneInput90" style="padding-right: 3rem" placeholder="请确保两次输入密码一致">
+				<script>
+					//初始化密码卫士,绑定键盘对象。数字参数：0代表全键盘，1代表数字键盘
+					passGuard2.generate("confirmPwd", kb, "passGuard2", 1);
+					//passGuard1.generate("kb1",kb,passGuard1,0);
+				</script>
+			</div>
+		</form>
+		<form class="mui-input-group form_item" style="margin-top: 0.2rem;">
+			<!--<div class="mui-input-row form_list">
+					<label>手机号</label>
+					<input id="mobileNo" maxlength="11" type="tel" class="w30" placeholder="请输入储蓄卡预留手机号">
+				</div>-->
+			<div class="mui-input-row form_list">
+				<label>验证码</label>
+				<input id="mobileVerifyCode" type="tel" pattern="[0-9]*" maxlength="6" class="vertify_code" />
+				<button type="button" id="vertifyBtn" class="vertify_btn">点击获取验证码</button>
+			</div>
+		</form>
+		<p id="verificationP">验证码已发送到<span>13322030021</span>的号码上</p>
+		<label class="agreementLa">
+			<input type="checkbox" name="items" value="我已阅读并同意" />我已阅读并同意<span class="agreementCo">《廊坊银行协议》</span>
+		</label>
+		<div class="bottom_btn">
+			<button id="nextPage" type="button" class="mui-btn mui-btn-red mui-btn-block">下一步</button>
+		</div>
+	</div>
+	<!-- <i class="iconfont icon-angle-down"></i> -->
+	<script src="../../js/common/immersed.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/common/jquery.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/common/mbank.core.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/mui.min.js"></script>
+	<script src="../../js/common/check.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/plugin/plugin-idcard.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/controllers/regist/regist_loginpwd.js" type="text/javascript" charset="utf-8"></script>
+
+	<script type="text/javascript">
+		mui.plusReady(function () {
+			regist_loginpwd.init();
+		});
+		window.onload = function () {
+			setTimeout(function () {
+				kb.generate();
+				Show = 0;
+			}, 100);
+		};
+	</script>
+	<script type="text/javascript">
+		
+
+		// 测试
+		// $('h1').click(function () {
+		// 	$.ajax({
+		// 		type: "post",
+		// 		url: "http://10.18.52.55:9083/perbank/acctOpen.do",
+		// 		dataType: "jsonp", //以键/值对的形式
+		// 		async: true,
+		// 		success: function (data) {
+        //             console.log(data);
+		// 		}
+		// 	})
+		// })
+
+
+
+
+	</script>
+</body>
+
+</html>

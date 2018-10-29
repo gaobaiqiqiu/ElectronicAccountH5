@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>添加储蓄卡</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no ,viewport-fit=cover"/>
+		<link href="../../css/mui.css" rel="stylesheet" />
+		<link href="../../css/home.css" rel="stylesheet" />
+		<style type="text/css">
+			.regist_chk{
+				padding: 1rem;
+				margin-bottom: 0rem;
+			}
+			.bottom_btn{
+				padding: 0 2rem;
+			}
+		</style>
+	</head>
+	<body>
+		<header class="mui-bar mui-action-back mui-bar-nav statusbar">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		    <h1 class="mui-title">添加储蓄卡</h1>
+		</header>
+		<div class="mui-content">
+	   	    <div class="regist_ok">
+	   	    	<div class="resigt_ok_tip">
+	   	    		
+	   	    	</div>
+	   	    </div>
+			<div class="form_item" style="display: none;">
+			   	<form class="mui-input-group">
+			   	    <div class="regist_card_list">
+						
+			   	    </div>
+			   	</form>
+			   	<div class="regist_pep">
+			   		<span>是否仅为中国内地税收居民</span>
+			   		<span id="registAgree" style="font-size: .9rem;color: #FF9900;margin-left: 5px;">说明</span>
+			   		<div class="regist_pep_radio">
+			   			<span>
+			   				<input type="radio" name="people" id="yes" class="xyIpt1" checked="checked"/>
+							<label>是</label>
+			   			</span>
+						<span>
+							<input type="radio" name="people" id="no" class="xyIpt1"/>
+							<label style="margin-left: 8px;">否</label>
+						</span>
+			   		</div>
+			   	</div>
+			   	<div class="regist_chk">
+			   		<input type="checkbox" id="chk" class="xyIpt" checked="checked" />
+					<label for="chk">我已详细阅读并同意</label><span id="agreeMent" style="color: #FF9900;">《开户协议》</span>
+			   	</div>
+			   	<div class="bottom_btn">
+			   		<button id="knowOk"  type="button" class="mui-btn mui-btn-red mui-btn-block">
+			   			我要添加新账户
+			   		</button>
+			   	</div>
+			</div>
+			<!--密码框-->
+			<div class="password_container">
+				<div class="password_list">
+					<div class="under_card">
+						添加为绑定卡:
+						<span class="under_card_num"></span>
+					</div>
+					<div class="password_tip">
+						请输入交易密码
+						<span id="closeTrade" class="password_close">×</span>
+					</div>
+					<div class="inputBoxContainer" id="inputBoxContainer">
+						<input type="tel" id="realInput" readonly="readonly" class="realInput" placeholder="请输入交易密码">
+				        <div class="bogusInput">
+				            <input type="text" maxlength="6" disabled/>
+				            <input type="text" maxlength="6" disabled/>
+				            <input type="text" maxlength="6" disabled/>
+				            <input type="text" maxlength="6" disabled/>
+				            <input type="text" maxlength="6" disabled/>
+				            <input type="text" maxlength="6" disabled/>
+				        </div>
+				    </div>
+				    <div class="tradepwd_tip">
+				   		如您忘记交易密码，请点击<span id="forgetPwd">交易密码找回</span>
+				   	</div>
+				</div>
+			</div>
+		</div>
+		<script src="../../js/common/immersed.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/common/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/common/mbank.core.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/common/check.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/plugin/plugin-idcard.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/controllers/regist/regist_success.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			mui.plusReady(function () {
+			    regist_success.init()
+			})
+		</script>
+	</body>
+
+</html>

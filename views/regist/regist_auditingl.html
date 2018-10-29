@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>审核页面</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no ,viewport-fit=cover"/>
+		<link href="../../css/mui.css" rel="stylesheet" />
+		<link href="../../css/home.css" rel="stylesheet" />
+	</head>
+	<body class="w20">
+		<div class="mui-content w20">
+			<a id="closeBtn" class="close_btn">关闭</a>
+			<div class="result_con">
+				<img src="../../images/fail.png"/>
+			</div>
+			<ul class="result_list">
+				<li>您的信息正在审核中</li>
+				<li>您的开户申请已提交，我们需要1-3天的时间审核</li>
+				<li>如有问题，请联系审核人员或拨打客服电话</li>
+				<li>400-620-0099 或 0316-96368</li>
+			</ul>
+			<div class="bottom_btn">
+		   		<button id="knowOk" type="button" class="mui-btn mui-btn-red mui-btn-block">
+		   			我知道了
+		   		</button>
+		   	</div>
+		</div>
+		<script src="../../js/common/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/common/mbank.core.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/controllers/regist/regist_fail.js"></script>
+		<script type="text/javascript">
+			mui.plusReady(function () {
+			    regist_fail.init();
+			})
+		</script>
+	</body>
+
+</html>

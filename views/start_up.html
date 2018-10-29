@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>启动页</title>
+		<link rel="stylesheet" type="text/css" href="../css/home.css" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no ,viewport-fit=cover" />
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0
+			}
+			
+			.skip {
+				display: block;
+				font-family: "微软雅黑";
+				color: #FFFFFF;
+				position: absolute;
+				top: 2rem;
+				border-radius: 50%;
+				right: 1rem;
+				height: 2rem;
+				width: 2rem;
+				text-align: center;
+				z-index: 11;
+				line-height: 2rem;
+				border: 1px solid #F3F3F3;
+			}
+			
+			.guide-img {
+				position: fixed;
+				top: 0;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				display: block;
+				width: 100%;
+				height: 100%;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="mui-content" id='guideShow' style="display: none;">
+			<span class="skip" id="skip"><span id="second">5</span>s</span>
+			<img id="banner" class="guide-img" src="../images/640x1136.png">
+		</div>
+		<script src="../js/common/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/common/mbank.core.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			mui.init({
+				swipeBack: false //不启用右滑关闭功能
+			});
+
+			mui.plusReady(function() {
+				var h = plus.screen.resolutionHeight;
+				var w = plus.screen.resolutionWidth;
+				if(plus.device.model == "iPhoneX") {
+					document.getElementById("skip").style.top = "3rem";
+				}
+				plus.screen.lockOrientation("portrait-primary"); //竖屏
+				plus.navigator.setStatusBarStyle("light");
+				plus.navigator.closeSplashscreen(); //关闭splash页面
+				clearSession();
+				var launchFlag = plus.storage.getItem("launchFlag");
+				plus.nativeUI.showWaiting();
+				if(launchFlag) {
+					//有值，说明已经显示过了，无需显示；
+					plus.nativeUI.closeWaiting();
+					document.getElementById("guideShow").style.display = "block";
+					plus.navigator.setFullscreen(false);
+				} else {
+					//无值，进入引导页
+					plus.nativeUI.closeWaiting();
+					plus.navigator.setFullscreen(true);
+					mui.openWindow({
+						url: "guide/guide.html",
+						id: 'guide',
+						styles: {
+							popGesture: "none"
+						},
+						waiting: {
+							autoShow: false
+						}
+					})
+					setTimeout(function() {
+						plus.webview.currentWebview().close("none");
+					}, 500)
+				}
+
+				var webview = "";
+				var bannerUrl = "http://blog.helloaxing.top";
+				document.getElementById("banner").addEventListener("tap", function() {
+					return;
+					plus.navigator.setStatusBarStyle('light');
+					clearInterval(timer);
+					webview = plus.webview.open(bannerUrl, 'banner', {
+						statusbar: 'light',
+						popGesture: 'none',
+						titleNView: {
+							backgroundColor: '#EB4746',
+							titleColor: '#FFF',
+							autoBackButton: true,
+							progress: {
+								color: '#2AC845',
+								height: '3px'
+							},
+							buttons: [{
+								text: '···',
+								float: 'right',
+								fontWeight: 'bold',
+								fontSize: '28px',
+								onclick: openBanner
+							}]
+						}
+					});
+					webview.addEventListener('close', function() {
+						webview = null;
+					});
+					webview.show();
+				})
+
+				//banner广告回调
+				function openBanner() {
+					if(mui.os.plus) {
+						var btn = [{
+							title: "复制链接"
+						}, {
+							title: "在浏览器中打开"
+						}];
+						plus.nativeUI.actionSheet({
+							cancel: "取消",
+							buttons: btn
+						}, function(b) {
+							switch(b.index) {
+								case 0:
+									break;
+								case 1:
+									switch(plus.os.name) {
+										case "Android":
+											var Context = plus.android.importClass("android.content.Context");
+											var main = plus.android.runtimeMainActivity();
+											var clip = main.getSystemService(Context.CLIPBOARD_SERVICE);
+											plus.android.invoke(clip, "setText", bannerUrl);
+											mui.toast("复制成功");
+											break;
+										case "iOS":
+											var UIPasteboard = plus.ios.importClass("UIPasteboard");
+											var generalPasteboard = UIPasteboard.generalPasteboard();
+											generalPasteboard.plusCallMethod({
+												setValue: bannerUrl,
+												forPasteboardType: "public.utf8-plain-text"
+											});
+											generalPasteboard.plusCallMethod({
+												valueForPasteboardType: "public.utf8-plain-text"
+											});
+											mui.toast("复制成功");
+											break;
+									}
+									break;
+								case 2:
+									plus.runtime.openURL(bannerUrl);
+									break;
+								default:
+									break
+							}
+						})
+					}
+				}
+
+				//重置返回
+				mui.back = function() {
+					translate();
+				}
+
+				//跳过事件
+				document.getElementById("skip").addEventListener('tap', function(event) {
+					translate();
+				}, false);
+
+				//倒计时
+				var seconds = 5;
+				var timer = setInterval(function() {
+					if(seconds == 1) {
+						clearInterval(timer);
+						translate();
+					} else {
+						seconds--;
+						document.getElementById("second").innerHTML = seconds;
+					}
+				}, 1000);
+
+				function translate() {
+					mui.openWindow({
+						id: "index",
+						url: "index/index.html",
+						show: {
+							aniShow: "slide-in-left"
+						},
+						waiting: {
+							autoShow: false
+						}
+					});
+					plus.navigator.setFullscreen(false);
+					setTimeout(function() {
+						plus.webview.currentWebview().close("none");
+					}, 1000)
+				}
+			})
+		</script>
+	</body>
+
+</html>

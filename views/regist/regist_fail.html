@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>开户审核中</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no ,viewport-fit=cover"/>
+		<link href="../../css/mui.css" rel="stylesheet" />
+		<link href="../../css/home.css" rel="stylesheet" />
+	</head>
+	<body class="w20">
+		<div class="mui-content w20">
+			<a id="closeBtn" class="close_btn">关闭</a>
+			<div class="result_con">
+				<img src="../../images/fail.png"/>
+			</div>
+			<ul class="result_list">
+				<li>开户失败</li>
+				<li>错误信息</li>
+			</ul>
+			<div class="bottom_btn">
+		   		<button id="knowOk" type="button" class="mui-btn mui-btn-red mui-btn-block">
+		   			我知道了
+		   		</button>
+		   	</div>
+		</div>
+		<script src="../../js/common/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/common/mbank.core.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/controllers/regist/regist_fail.js"></script>
+		<script type="text/javascript">
+			mui.plusReady(function () {
+			    regist_fail.init();
+			})
+		</script>
+	</body>
+
+</html>

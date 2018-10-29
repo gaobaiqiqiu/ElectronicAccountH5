@@ -1,0 +1,52 @@
+{
+	"views/regist/regist.html": {
+		"refer": [
+			"views/error/error.html",
+			"views/regist/regist_fail.html",
+			"views/regist/regist_success.html",
+			"views/regist/regist_loginpwd.html",
+			"views/regist/regist_agree.html",
+			"views/regist/regist.html"
+		],
+		"resources": []
+	},
+	"views/regist/regist_fail.html": {
+		"refer": [
+			"views/login/login.html"
+		],
+		"resources": []
+	},
+	"views/index/index.html": {
+		"refer": [
+			"views/guide/guide.html",
+			"views/login/login.html",
+			"views/loan/loan.html",
+			"views/account/account.html"
+		],
+		"resources": []
+	},
+	"views/login/login.html": {
+		"refer": [
+			"views/index/index.html",
+			"views/regist/regist.html"
+		],
+		"resources": []
+	},
+	"views/regist/regist_success.html": {
+		"refer": [
+			"views/login/login.html"
+		]
+	},
+	"views/regist/regist_agree.html": {
+		"refer": [
+			"views/regist/regist.html",
+			"views/regist/regist_loginpwd.html"
+		]
+	},
+	"views/regist/regist_loginpwd.html": {
+		"refer": [
+			"views/regist/regist_loginpwd.html",
+			"views/regist/regist_agree.html"
+		]
+	}
+}

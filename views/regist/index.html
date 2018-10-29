@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>index</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no ,viewport-fit=cover" />
+	<!-- <link href="../../css/mui.css" rel="stylesheet" />
+	<link href="../../css/home.css" rel="stylesheet" />
+	<link rel="stylesheet" href="../../css/microdone-h5.css" />
+	<link rel="stylesheet" href="../../css/demo.css" />
+	<link rel="stylesheet" href="http://at.alicdn.com/t/font_889368_kzv7sb7gih.css">
+	<style type="text/css">
+	
+	</style> -->
+</head>
+
+<body>
+	<div class="bottom_btn">
+		<button id="nextPage" type="button" class="mui-btn mui-btn-red mui-btn-block">下一步</button>
+	</div>
+	<!-- <script src="../../js/common/immersed.js" type="text/javascript" charset="utf-8"></script> -->
+	<script src="../../js/common/jquery.js" type="text/javascript" charset="utf-8"></script>
+	<!-- <script src="../../js/common/mbank.core.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/mui.min.js"></script>
+	<script src="../../js/common/check.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/plugin/plugin-idcard.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/controllers/regist/regist.js" type="text/javascript" charset="utf-8"></script> -->
+	<script type="text/javascript">
+
+		/*控制页面的高度*/
+		document.documentElement.style.fontSize = innerWidth / 16 + 'px';
+		onresize = function () {
+			document.documentElement.style.fontSize = innerWidth / 16 + 'px';
+		};
+		// mui.plusReady(function () {
+		// 	regist.init();
+		// })
+		
+		
+        $("#nextPage").click(function(){
+            // window.location.href = "http://60.10.20.25:86/elapp/index.html";
+             var reqData = {
+				"idNo": "130823198010285036"
+            };
+            $.ajax({
+				type: "post",
+				url: "http://60.10.20.25:86/elapp/acctOpen.do",
+                dataType: "jsonp", //以键/值对的形式
+                data: reqData,
+				async: true,
+				success: function (data) {
+                    console.log(data);
+				}
+			})
+
+			// apiSend('post', 'acctOpen.do', reqData, faceFun, null, true);
+        })
+        
+        function faceFun(result) {
+			console.log(121212121);
+		}
+       
+
+
+	</script>
+</body>
+
+</html>
