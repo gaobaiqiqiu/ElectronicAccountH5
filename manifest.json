@@ -2519,7 +2519,8 @@
 					"images/wallet.png"
 				],
 				"refer": [
-					"views/regist/regist_success.html"
+					"views/regist/regist_success.html",
+					"views/regist/regist_fail.html"
 				],
 				"priority": 3
 			},

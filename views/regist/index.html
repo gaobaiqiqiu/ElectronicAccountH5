@@ -5,122 +5,24 @@
 	<meta charset="UTF-8">
 	<title>index</title>
 	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no ,viewport-fit=cover" />
-	<!-- <link href="../../css/mui.css" rel="stylesheet" />
-	<link href="../../css/home.css" rel="stylesheet" />
-	<link rel="stylesheet" href="../../css/microdone-h5.css" />
-	<link rel="stylesheet" href="../../css/demo.css" />
-	<link rel="stylesheet" href="http://at.alicdn.com/t/font_889368_kzv7sb7gih.css">
-	<style type="text/css">
-	
-	</style> -->
 </head>
 
-<body>
-	<div class="bottom_btn">
-		<button id="nextPage" type="button" class="mui-btn mui-btn-red mui-btn-block">下一步</button>
-	</div>
-	<!-- <script src="../../js/common/immersed.js" type="text/javascript" charset="utf-8"></script> -->
+<body id="bod">
+
+	<!-- <form action='http://60.10.20.25:86/elapp/acctOpen.do' method='post' id="myform" name="Submit"> -->
+	<form action='http://60.10.20.25:86/elapp/acctOpen.do' method='post' id="myform" name="Submit">
+		<button id="jqueryBtn">表单提交</button>
+	</form>
+	
+
 	<script src="../../js/common/jquery.js" type="text/javascript" charset="utf-8"></script>
-	<!-- <script src="../../js/common/mbank.core.js" type="text/javascript" charset="utf-8"></script>
-	<script src="../../js/mui.min.js"></script>
-	<script src="../../js/common/check.js" type="text/javascript" charset="utf-8"></script>
-	<script src="../../js/plugin/plugin-idcard.js" type="text/javascript" charset="utf-8"></script>
-	<script src="../../js/controllers/regist/regist.js" type="text/javascript" charset="utf-8"></script> -->
+
 	<script type="text/javascript">
 
-		/*控制页面的高度*/
-		document.documentElement.style.fontSize = innerWidth / 16 + 'px';
-		onresize = function () {
-			document.documentElement.style.fontSize = innerWidth / 16 + 'px';
-		};
-		// mui.plusReady(function () {
-		// 	regist.init();
-		// })
-
-
-		$("#nextPage").click(function () {
-			// window.location.href = "http://60.10.20.25:86/elapp/index.html";
-			// var reqData = {
-			// 	"timeStamp": '20181029141951',
-			// 	"userData": '{\"ip\":\"127.0.0.1\",\"version_num\":\"0.0.1\"}',
-			// 	"idName": '李国立',
-			// 	"signature": '',
-			// 	"requestId": '20181029141951959403',
-			// 	"appId": '001',
-			// 	"interfaceId": 'acctOpen',
-			// 	"applicationId": '00',
-			// 	"appChaId": '0001',
-			// 	"version": '1.0',
-			// 	"idNo": '',
-			// 	"url": 'http://localhost:8180/index?tokenId=null&enterpriseName=null'
-			// };
-
-			// var reqData = {
-			// 	"timeStamp": '20181029141951',
-			// 	// "userData": '{\"ip\":\"127.0.0.1\",\"version_num\":\"0.0.1\"}'
-			// 	"idName": '李国立',
-			// 	"signature": '123',
-			// 	"requestId": '20181029141951959403',
-			// 	"appId": '001',
-			// 	"interfaceId": 'acctOpen',
-			// 	"applicationId": '00',
-			// 	"appChaId": '0001',
-			// 	"version": '1.0',
-			// 	"idNo": '141023199301250028',
-			// 	"url": 'http://localhost:8180/index?tokenId=null&enterpriseName=null'
-			// };
-
-			// var reqS = {
-			// 	"id":"08",
-			// 	"osType":"aaa",
-			// 	"uuid":"Uss",
-			// 	"imei":"sssx",
-			// 	"Mac":"wwwq",
-			// 	"address":"tttq",
-			// 	"lat":"yyh",
-			// 	"long":"weqw",
-			// 	"platform":"weqwe",
-			// 	"version_num":"qweqwe"
-			// }
-
-			var reqData = {
-				"requestId": '01',
-				"appId": '02',
-				"appChaId": '03',
-				"interfaceId": '04',
-				"applicationId": '05',
-				"version": '06',
-				"timeStamp": '20181026214850',
-				"userData": "{'id':'08','osType':'aaa','uuid':'Uss','imei':'sssx','Mac':'wwwq','address':'tttq','lat':'yyh',"
-				+"'long':'weqw','platform':'weqwe','version_num':'qweqwe'}",
-				"openId":'sg',
-				"idName": '孟令聪',
-				"idNo": '230904199308121318',
-				"bindCard":'6798752666666666',
-				"bindTele":'15210026151',
-				"signature": 'laROrzxk9OkRF+DX+QOO9GkmY4D6Q6Y/BPKpM8PB/+xH4jZpa6G0lGi4Y7Ok6O98eLBxhUGl8/dYyvaoVEPU4d21roQDXlkkAwEW/FK2a4jAvxBdwjzmPrlNJh7VKcdCfkPB7wbcURyYGJYjY96cRTLOhrZoNa//6nKzcpVg8pfpTG7dtBfEA15FWsZ/ZjoqV6a7QJ47aU8Mg+PpGPHt9CRE/ausbHkRU97CDL1pGlGpiPpSwLvVDJs1JsD1xtZryi5EBdjPqxDUfJwFXmIYzHY2ew3Yt9LUOoMnktaUcuGhdNqR5yZqYHbp+NWdHEtzBrjj4EqtzIJzjBr91gs08A=='
-			};
-			$.ajax({
-				type: "post",
-				url: "http://60.10.20.25:86/elapp/acctOpen.do",
-				dataType: "jsonp", //以键/值对的形式
-				data: reqData,
-				async: true,
-				success: function (data) {
-					console.log(data);
-				},
-				error: function (data) {
-					console.log(data);
-					console.log("异步请求失败");
-				}
-			})
-
-			// apiSend('post', 'acctOpen.do', reqData, faceFun, null, true);
+		$("#jqueryBtn").click(function () {
+			$("#myform")[0].action = $("#myform")[0].action + "?timeStamp=20191030125900&userData%5Bip%5D=127.0.0.1&userData%5Bversion_num%5D=0.0.1&idName=M79ztth6mWA0mqhbkHH3ByaxaTdc2h28UwTtVCjI6OD1WSSodBny3Lzaas32V9rrUpwz91SRfwmNv6Vy8HyNIXj%2FL9umqQu%2FP5yfPyE9ezkF%2FpWoQH25lsaECpEFyMUfHiH8OktBx%2Fl8aTRbLN2bQwWCT67WnzE6i9haGt4%2BEm9XeAordiExuqD7PoY0QZTQStBVXQ%2FOLaszEqjkEYgkjabdm2gTHVJp2XKKyMkxqroPZqMYT7jWOq4xwdbiIdRn2sYWl9c7bPbsFfkAH8iN%2BjuOdNKJE0hLdJmytxtAD3g%2BRrARLS%2FNTgK%2B7l%2BrER8pilrDvDxZL3fxGhJzDYxoGA%3D%3D&signature=ZoUGMiQmBxj4LW8FK5CO8HrHaQrvd9clkXUL6xSM1FFnzdC3%2FXn8l0PWiJn6w6as59xxI22LRjVLlsSxXjBmCU3NpO%2FJuT66pVBPLnDEA33yeZy%2FKF3n9O2Eu7D0j0wD61EVvVT7ImoKUZTfMvOkkbyu2U%2BilvcvYHcubYtaGLV3iifMxvwNMZayXDB6KDn%2F%2BsT32fLKOwqoTxqnW4bUxB7zPEKrUDjZGrf9xKroBP9jYZEe6DjH1Ir3kcZyweZpfA3sc96rtTY24tNJpbnSYtYipG9tIEJrsrtfpOBYe6y7KaRd132RFQCNg4lw9uAYUOM8BZp5OwIqPMQxiNKgxQ%3D%3D&requestId=20181029210608146559&appId=001&interfaceId=acctOpen&applicationId=00&idNo=Tjae6RS%2BnCodUW5GLC2IhK1N%2F6GVDIkm%2FvEUfuaBmZiZQPpU5Lb3wbDqRtEAsQnqT6LZXgSHQmRV3vaYny02yH35gxgO49q0fiYISlfm0P3d8Jf1a1Dtk4bqXk0%2BS2kDzvDwZOSLfmKDgAgeMm5FJclG6xZXWEo1wDJmBYAPq9QBOUqD9qsVDhtoQDf12hBmT7UP%2Bbd84HXGL5%2BLgPk8A8OGSrDYDGiCyr1cZIdoCVehpFcTMgD7u%2FUpYoSKTK6ze0LV%2BlKRMW0kuI8bifdrKBJLpU2poaAs%2FioiScrw%2FhlmmxNZQvX7aIcBENTLb%2FVpfrhVdf8QXQdbBlh6kG8TMw%3D%3D&appChaId=0001&version=1.0&url=k0XOphFu4xyQHFkauxjJSttOsh4TntwGgz2vjrGST2F9zBtiN9gyk%2FDLXL8LWHiXaT7WfGru201LMbJo%2BCAgqd%2BfO%2FLWvZfF1UihNOiQXk867rgsb9nBuM%2BTOGDZm6Ez%2Bi%2BgJ9eW35ZXjS7hHqLVaS8l4JX4wFuXqk46cm%2B1HoWacAvL%2F1pYHEtpNU%2Fjru4TkpT4SmWCw8UmTXe%2BAJ804uRWugbvd0EUrZSgkxCKhNWzwyZHvDXaXGk8D1hZ3HFFACkkqhiy1ybrF9qOG5bF8R1fz4kP2NPpSXcWdp8z5JOi7FR1995U3JftH%2FxncH9jOTgBuI9%2FgbxlF31mxbBj2A%3D%3D&_=1540883664713";
+			$("#myform").submit();
 		})
-
-		function faceFun(result) {
-			console.log(121212121);
-		}
 
 
 

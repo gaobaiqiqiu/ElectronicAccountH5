@@ -1166,7 +1166,8 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 	color: #000000;
 	/* font-size: 1rem; */
 	font-size: 0.7rem;
-	margin-bottom: 0.3rem;
+	/* margin-bottom: 0.3rem; */
+	margin-bottom: 0.1rem;
 }
 .upload_left{
 	text-align: center;
@@ -1279,7 +1280,8 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 .bottom_btn{
 	width: 100%;
 	box-sizing: border-box;
-	padding: 2rem 2rem 0;
+	/* padding: 2rem 2rem 0; */
+	padding: 0.3rem 2rem 0;
 }
 .bottom_tip{
 	width: 100%;

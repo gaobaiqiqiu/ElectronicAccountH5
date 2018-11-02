@@ -46,7 +46,9 @@
 	"views/regist/regist_loginpwd.html": {
 		"refer": [
 			"views/regist/regist_loginpwd.html",
-			"views/regist/regist_agree.html"
+			"views/regist/regist_agree.html",
+			"views/regist/regist_fail.html",
+			"views/regist/regist_success.html"
 		]
 	}
 }

@@ -10,7 +10,7 @@
 	var certNo; //证件号
 	var startDate; //证件起始日
 	var endDate; //证件到期日
-	var accountNo; //账号
+	var accountNo; //卡号
 	var shjihaom; //手机号
 	var uuID;
 	var fileInputName;
@@ -18,6 +18,12 @@
 	var imgWidth;
 	var bitmap = null;
 	var OCRflag;
+
+	var pictureFlowNo1;
+	// var pictureFlowNo2;
+	// var pictureFlowNo3;
+	var compareResult;  //相似度的对比
+	var returnFlag;  // 鉴权返回
 
 	//初始化页面
 	regist.init = function () {
@@ -29,8 +35,8 @@
 	//初始化数据
 	regist.initData = function () {
 		self = plus.webview.currentWebview();
-		plus.navigator.setStatusBarStyle('dark'); //状态栏
 
+		plus.navigator.setStatusBarStyle('dark'); //状态栏
 		imgWidth = jQuery(".upload_img").innerWidth();
 		jQuery(".upload_img").height(imgWidth / 1.6);
 	};
@@ -50,7 +56,7 @@
 		} else {
 			uuID = plus.device.imei;
 		}
-
+		console.log(userName.value)
 		//监听侧滑
 		self.addEventListener('popGesture', function (e) {
 			if (e.type == "end" && !e.result) {
@@ -263,109 +269,47 @@
 			var ctx = canvas.getContext("2d");
 			ctx.drawImage(img, x, 0, canvas.height / scale, canvas.height);
 			var base64 = canvas.toDataURL("image/" + ext, 1);
-			// var reqData = {
-			// 	"uuID": uuID,
-			// 	"fileInputName": fileInputName,
-			// 	"baseStr": baseStr
-			// }
-
-			// var reqData = {
-			// 	"certNo": certNo.value,
-			// 	"userName": userName.value,
-			// 	"baseStr": baseStr,
-			// 	"currentBusinessCode": "12000043"
-			// }
-
-			// var reqData = {
-			// 	"IMG_1": "",
-			// 	"IMG_1_YXPC": "",
-			// 	"IMG_1_YXUPTIME": "",
-			// 	"IMG_2": "",
-			// 	"IMG_2_YXPC": "",
-			// 	"IMG_3": "",
-			// 	"YWID": "",
-			// 	"BISDATE": "",
-			// 	"BISTIME": "",
-			// 	"OPERID": "",
-			// 	"OPERNAME": "",
-			// 	"CSTIDCARD": "",
-			// 	"CSTNAME": "",
-			// 	"ZHANGHAO": "",
-			// 	"BEIZHU": "",
-			// 	"currentBusinessCode": "12000043"
-			// }
 
 
-			//apiSend('post', 'eleRegisterUploadImg.do', reqData, function(result) {
+			//上传图片--->联网核查
+			var reqData = {
+				"fileInputName": fileInputName,
+				"baseStr": baseStr,
+				"tranType": "0",
+				"certNo": "410101197801010074",
+				"pictureFlowNo1": '',
+				"pictureFlowNo2": ''
+			}
+			apiSend('post', 'eleAccAppUpLoadImage.do', reqData, function (result) {
 				jQuery("#" + id).find(".img_tip").css("display", "block").attr("src", base64);
-			//}, null, true);
-
-			// 正面照
-			// var reqData = {
-			// 	"baseStr": baseStr,
-			// 	"certNo": "410101197801010074",
-			// 	"userName": '欧阳于一',
-			// 	"currentBusinessCode": ""
-			// }
-			// apiSend('post', 'eleAccOnlineCheckForMobile.do', reqData, checkInp, null, true);
-
-			//银行卡
-			// var reqData = {
-			// 	"fileInputName": 'filePathName4',
-			// 	"baseStr": baseStr,
-			// 	"tranType": "0",
-			// 	"certNo": "410101197801010074",
-			// 	"pictureFlowNo1": '',
-			// 	"pictureFlowNo2": ''
-			// }
-			// apiSend('post', 'eleAccAppUpLoadImage.do', reqData, checkInp, null, true);
-
-			// function checkInp(data) {
-			// 	console.log('成功');
-			// }
-			
+				pictureFlowNo1 = result.pictureFlowNo1;
+				// pictureFlowNo2 = result.pictureFlowNo2;
+				// pictureFlowNo3 = result.pictureFlowNo3;
+			}, null, true);
 		}
-
 
 		//下一步
 		document.getElementById("nextPage").addEventListener('tap', function () {
-
-			var reqData = {
-				"pictureFlowNo1": '201912251432061003499',
-				"pictureFlowNo2": '201912251432061003499',
-				"pictureFlowNo3": '201912251432061003499',
-				"baseStr": baseStr,
-				"tranType": "0",
-				"currentBusinessCode": '',
-				"accountNo":'',
-				"fileFlowNo":'',
-				"channelCode":'030',
-				"certNo": '410101197801010074',
-				"userName":'欧阳于一',
-			}
-			// apiSend('post', 'eleAccAppCheckFace.do', reqData, checkInp, null, true);
-			apiSend('post', 'eleAccAppOnlineCheck.do', reqData, faceFun, null, true);
-
-			// function checkInp(data) {
-			// 	console.log('成功');
-			// }
+			// 鉴权
+			// var reqData = {
+			// 	"zhjnzlei": "10",
+			// 	"zhjhaoma": '410101197801010074',
+			// 	"lyzhzhao": '6230730027394221',
+			// 	"jiyijigo": '601108',
+			// 	"jiyiguiy": 'DZ0012',
+			// 	"yanzhenma": '',
+			// 	"yanzmals": '',
+			// 	"actionFlag": "00",
+			// 	"channelCode": '030',
+			// 	"currentBusinessCode": "",
+			// 	"kehuzhwm": '欧阳于一',
+			// 	"shjihaom": '18710563021'
+			// };
 
 
-
-			// var checkFace1 = jQuery("#authorY").find(".img_tip").attr("src");
-			// var checkFace2 = jQuery("#authorN").find(".img_tip").attr("src");
-			// var checkFace3 = jQuery("#authorH").find(".img_tip").attr("src");
-			// var checkFace4 = jQuery("#bankY").find(".img_tip").attr("src");
-			// console.log("正面：" + checkFace1);
-			// console.log("反面：" + checkFace2);
-			// console.log("手持：" + checkFace3);
-			// console.log("卡正：" + checkFace4);
-			console.log("accountNo：" + accountNo.value);
-			console.log("startDate：" + startDate.value);
-			console.log("endDate：" + endDate.value);
-			console.log("userName：" + userName.value);
-			console.log("certNo：" + certNo.value);
-			console.log("shjihaom:" + shjihaom.value)
+			var checkFace3 = jQuery("#authorH").find(".img_tip").attr("src");
+			// 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
+			console.log(checkFace3)
 			//校验照片
 			var imgEl = jQuery(".img_tip");
 			for (var i = 0; i < imgEl.length; i++) {
@@ -394,10 +338,43 @@
 									if (time1GreaterThanTime2(startDate.value, endDate.value)) {
 										plus.nativeUI.toast("证件起始日不能大于或等于证件到期日");
 									} else {
-										alert(123);
-										// //ajax
-										// // apiSend('post', 'eleAccAppCheckFace.do', reqData, faceFun, null, true);
-										faceFun();
+										//鉴权								
+										var reqData = {
+											"zhjnzlei": "10",
+											"zhjhaoma": certNo.value,
+											"lyzhzhao": accountNo.value,
+											"jiyijigo": '601108',
+											"jiyiguiy": 'DZ0012',
+											"yanzhenma": '',
+											"yanzmals": '',
+											"actionFlag": "00",
+											"channelCode": '030',
+											"currentBusinessCode": "",
+											"kehuzhwm": userName.value,
+											"shjihaom": shjihaom.value
+										};
+										apiSend('post', 'eleAccCheckUserInfoForMobile.do', reqData, returnFl, returnFail, true);
+										function returnFl(data) {
+											returnFlag = data.returnFlag;
+											// 下一页
+											var reqData = {
+												"pictureFlowNo1": pictureFlowNo1,
+												"pictureFlowNo2": pictureFlowNo1,
+												"pictureFlowNo3": pictureFlowNo1,
+												"baseStr": checkFace3,
+												"tranType": "0",
+												"currentBusinessCode": '',
+												"accountNo": '',
+												"fileFlowNo": '',
+												"channelCode": '030',
+												"certNo": certNo.value,
+												"userName": userName.value
+											}
+											apiSend('post', 'eleAccAppOnlineCheck.do', reqData, faceFun, null, true);
+										}
+										function returnFail() {
+											plus.nativeUI.toast("鉴权失败");
+										}
 									}
 								} else {
 									plus.nativeUI.toast("证件已过期！");
@@ -408,50 +385,12 @@
 				}
 			}
 
-			var reqData = {
-				"zhjnzlei": "10",
-				"kehuzhwm": '全渠道',
-				"zhjhaoma": '341126197709218366',
-				"lyzhzhao": '6216261000000000018',
-				"jiyijigo": '601108',
-				"jiyiguiy": 'DZ0012',
-				"shjihaom": shjihaom.value,
-				"actionFlag": "00",
-				"channelCode": '030',
-				"currentBusinessCode": "12000043"
-			};
 
-
-			// var reqData = {
-			// 	"zhjnzlei": "10",
-			// 	"kehuzhwm": userName.value,
-			// 	"zhjhaoma": certNo.value,
-			// 	"lyzhzhao": accountNo.value,
-			// 	"jiyijigo": '',
-			// 	"jiyiguiy": '',
-			// 	"shjihaom": shjihaom.value,
-			// 	"actionFlag": "00",
-			// 	"channelCode": '0001',
-			// 	"currentBusinessCode": "12000043"
-			// };
-			// apiSend('post', 'eleAccCheckUserInfoForMobile.do', reqData, faceFun, null, true);
-
-			// =======================================================================
-			// var reqDatas = {
-			// 	"zhjhaoma": '410101197801010074',
-			// 	"kehuzhwm": '欧阳于一',
-			// 	"lyzhzhao": "6230730027394221",
-			// 	"zhjnzlei": '10',
-			// 	"chaxlxin": '02'
-			// };
-			//ajax
-			// alert(1)
-			// apiSend('post', 'eleAccOpenCardNum.do', reqDatas, faceFun, null, true);
-			// alert(2)
-			// =======================================================================
 		})
 
 		function faceFun(result) {
+			console.log(result.compareResult)
+			compareResult = result.compareResult;
 			mui.openWindow({
 				id: 'regist_loginpwd',
 				url: 'regist_loginpwd.html',
@@ -465,31 +404,11 @@
 					shjihaom: shjihaom.value,
 					startTime: startDate.value,
 					endTime: endDate.value,
-					OCRflag: OCRflag
+					compareResult: compareResult,
+					returnFlag: returnFlag
 				}
 			});
 		}
-
-		//注册成功回调
-		// function registsucFun(result) {
-		// 	//下一步
-		// 	mui.openWindow({
-		// 		id: 'regist_loginpwd',
-		// 		url: 'regist_loginpwd.html',
-		// 		waiting: {
-		// 			autoShow: false
-		// 		},
-		// 		extras: {
-		// 			userName: userName.value,
-		// 			certNo: certNo.value,
-		// 			shjihaom: shjihaom.value,
-		// 			accountNo: accountNo.value,
-		// 			startTime: startDate.value,
-		// 			endTime: endDate.value,
-		// 			OCRflag: OCRflag
-		// 		}
-		// 	})
-		// }
 	}
 
 }(mui, window.regist = {}));
