@@ -1080,17 +1080,18 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 	width: 100%;
 	/* margin: 10px auto; */
 }
-.form_list{
+/* .form_list{
 	height: 50px!important;
 	line-height: 50px!important;
-}
+} */
 /* .form_list input{
 	height: 50px!important;
 } */
 .form_list label{
-	height: 2rem;
+	/* height: 2rem; */
+	height: 100%;
 	color: #000000;
-	line-height: 2rem;
+	line-height: 100%;
 	padding: 0 0 0 1.5rem;
 }
 .form_list .form_list_readipt{
@@ -1281,7 +1282,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 	width: 100%;
 	box-sizing: border-box;
 	/* padding: 2rem 2rem 0; */
-	padding: 0.3rem 2rem 0;
+	padding: 0.5rem 2rem 0;
 }
 .bottom_tip{
 	width: 100%;

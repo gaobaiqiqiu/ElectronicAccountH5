@@ -39,25 +39,25 @@
 		
 		//关闭
 		document.getElementById("closeBtn").addEventListener("tap", function () {
-			// mui.openWindow({
-			// 	id: 'login',
-			// 	url: '../login/login.html',
-			// 	waiting: {
-			// 		autoShow: false
-			// 	}
-			// });
+			mui.openWindow({
+				id: 'login',
+				url: '../login/login.html',
+				waiting: {
+					autoShow: false
+				}
+			});
 			plus.navigator.setStatusBarStyle('light'); //状态栏
 		});
 
 		// 失败页面的点击
 		document.getElementById("knowOk").addEventListener("tap", function () {
-			// mui.openWindow({
-			// 	id: 'login',
-			// 	url: '../login/login.html',
-			// 	waiting: {
-			// 		autoShow: false
-			// 	}
-			// });
+			mui.openWindow({
+				id: 'login',
+				url: '../login/login.html',
+				waiting: {
+					autoShow: false
+				}
+			});
 			plus.navigator.setStatusBarStyle('light'); //状态栏
 		});
 	}

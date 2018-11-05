@@ -2520,7 +2520,8 @@
 				],
 				"refer": [
 					"views/regist/regist_success.html",
-					"views/regist/regist_fail.html"
+					"views/regist/regist_fail.html",
+					"views/regist/regist_agree.html"
 				],
 				"priority": 3
 			},
@@ -2731,7 +2732,9 @@
 					"images/wallet.png"
 				],
 				"priority": 5,
-				"refer": []
+				"refer": [
+					"views/regist/regist_loginpwd.html"
+				]
 			},
 			"views/account/recharge/recharge_limit.html": {
 				"href": "views/account/recharge/recharge_limit.html",

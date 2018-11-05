@@ -468,3 +468,186 @@ mui.plusReady(function() {
         imm.toggleSoftInput(0, InputMethodManager.SHOW_FORCED);
     }
 }*/
+
+
+// ======================================================================================================
+
+// 证件起始日
+function checkLength(psdObj, tit, num) {
+	var psd = psdObj.value
+	console.log(psd.length)
+	if (psd.length != num) {
+		console.log(tit + "长度必须为" + num + "位纯数字");
+		psdObj.style.color = "red";
+		return false;
+	} else {
+		psdObj.style.color = "#000";
+		// console.log(psd)
+		var date = new Date();
+		var year = date.getFullYear(); //获取当前年份
+		var mon = date.getMonth() + 1; //获取当前月份
+		var da = date.getDate(); //获取当前日
+		mon < 10 ? mon = "0" + mon : mon;
+		da < 10 ? da = "0" + da : da;
+		// 截取年月日
+		var yearInp = (psd + "").substring(0, 4);
+		var monInp = (psd + "").slice(4, 6);
+		var daInp = (psd + "").substring(6);
+		var arr;  //月份对应的天数
+		function runNian(num) {
+			return {
+				"01": 31,
+				"02": num,
+				"03": 31,
+				"04": 30,
+				"05": 31,
+				"06": 30,
+				"07": 31,
+				"08": 31,
+				"09": 30,
+				"10": 31,
+				"11": 30,
+				"12": 31
+			}
+		}
+
+		if (yearInp % 4 == 0 && yearInp % 100 != 0) {
+			arr = runNian(29);
+		} else if (yearInp % 400 == 0) {
+			arr = runNian(29);
+		} else {
+			arr = runNian(28);
+		}
+
+		if (yearInp < year) {
+			if (monInp <= 12 && monInp > 0) {
+				for (var item in arr) {
+					if (item == monInp) {
+						console.log(arr[item])
+						if (daInp > arr[item]) {
+							psdObj.style.color = "red";
+							plus.nativeUI.toast("证件起始日天数不存在");
+						} else {
+							psdObj.style.color = "#000";
+							return true;
+						}
+					}
+				}
+			} else {
+				psdObj.style.color = "red";
+				plus.nativeUI.toast("证件起始日月份不存在");
+			}
+		} else if (yearInp > year) {
+			psdObj.style.color = "red";
+			plus.nativeUI.toast("证件起始日年份不能大于今年");
+		} else {
+			if (monInp < mon) {
+				for (var item in arr) {
+					if (item == monInp) {
+						console.log(arr[item])
+						if (daInp > arr[item]) {
+							psdObj.style.color = "red";
+							plus.nativeUI.toast("证件起始日天数不存在");
+						} else {
+							psdObj.style.color = "#000";
+							return true;
+						}
+					}
+				}
+
+			} else if (monInp > mon) {
+				psdObj.style.color = "red";
+				plus.nativeUI.toast("证件起始日月份不能大于本月");
+			} else {
+				if (daInp <= da) {
+					psdObj.style.color = "#000";
+					return true;
+				} else {
+					psdObj.style.color = "red";
+					plus.nativeUI.toast("证件起始日天数不能大于今天");
+				}
+			}
+		}
+	}
+}
+// 证件结束日
+function checkLengthEnd(psdObj, psdObj2, tit, num) {
+	// 证件起始日时间
+	var psd = psdObj.value
+	var yearInp = (psd + "").substring(0, 4);
+	var monInp = (psd + "").slice(4, 6);
+	var daInp = (psd + "").substring(6);
+	// 证件到期日时间
+	var psd2 = psdObj2.value
+	var yearInp2 = (psd2 + "").substring(0, 4);
+	var monInp2 = (psd2 + "").slice(4, 6);
+	var daInp2 = (psd2 + "").substring(6);
+	if (psd2.length != num) {
+		console.log(tit + "长度必须为" + num + "位纯数字");
+		psdObj2.style.color = "red";
+		return false;
+	} else {
+		if (yearInp2 >= yearInp) {
+			if (monInp2 == monInp) {
+				if (daInp2 == daInp) {
+					psdObj2.style.color = "#000";
+					return true;
+				} else {
+					psdObj2.style.color = "red";
+					plus.nativeUI.toast("证件到期日天数与证件起始日天数不同");
+					return false;
+				}
+			} else {
+				psdObj2.style.color = "red";
+				plus.nativeUI.toast("证件到期日月份与证件起始日月份不同");
+				return false;
+			}
+		} else{
+			psdObj2.style.color = "red";
+			plus.nativeUI.toast("证件到期日不能小于证件起始日");
+			return false;
+		}
+	}
+
+}
+
+// 手机号码
+function checkphoneSi(phoneObj) {
+	var regu = /^[1][3,5,7,8][0-9]{9}$/;
+	var re = new RegExp(regu);
+	var phone = phoneObj.value;
+	if (phone == "" || phone == null) {
+		console.log("手机号不能为空");
+		phoneObj.style.color = "red";
+		return false;
+	} else if (re.test(phone)) {
+		phoneObj.style.color = "#000";
+		var phoneObjVa = phoneObj.value;
+		phoneObjVa = phoneObjVa.substring(0, 3) + ' ' + phoneObjVa.substring(3, 7) + ' ' + phoneObjVa.substring(7, 11);
+		phoneObj.value = phoneObjVa;
+		return true;
+	} else {
+		console.log("手机号格式有误");
+		phoneObj.style.color = "red";
+		return false;
+	}
+}
+
+// 银行卡号
+function accountNoLength(psdObj, tit, num1, num2) {
+	var psd = psdObj.value;
+	console.log(psd)
+	if (psd.length != '') {
+		if (psd.length < num1 || psd.length > num2) {
+			console.log("请输入长度为" + num1 + "或" + num2 + "位纯数字的" + tit);
+			psdObj.style.color = 'red';
+		} else {
+			psdObj.style.color = '#000';
+			psd = psd.substring(0, 4) + ' ' + psd.substring(4, 8) + ' ' + psd.substring(8, 12)+ ' ' + psd.substring(12, 16);
+			psdObj.value = psd;
+			return true;
+		}
+	} else {
+		console.log('卡号不能为空')
+	}
+}

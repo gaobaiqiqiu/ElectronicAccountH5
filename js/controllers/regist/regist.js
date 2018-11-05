@@ -65,7 +65,7 @@
 				plus.navigator.setStatusBarStyle('light');
 			}
 		})
-
+		console.log(shjihaom.value)
 		//重置返回
 		var old_back = mui.back;
 		mui.back = function () {
@@ -306,10 +306,8 @@
 			// 	"shjihaom": '18710563021'
 			// };
 
-
+			// 正面照的base64值
 			var checkFace3 = jQuery("#authorH").find(".img_tip").attr("src");
-			// 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
-			console.log(checkFace3)
 			//校验照片
 			var imgEl = jQuery(".img_tip");
 			for (var i = 0; i < imgEl.length; i++) {
@@ -327,61 +325,72 @@
 					return
 				}
 			}
-
+			console.log(certNo.value)
+			console.log(shjihaom.value)
 			//校验身份证
 			if (checkUserName(userName.value)) {
 				if (isCardID(certNo.value)) {
-					if (checkDate(startDate.value, "证件起始日")) {
-						if (checkDate(endDate.value, "证件到期日")) {
-							if (checknull(accountNo.value, "绑定卡号")) {
-								if (compareDateWithToday(endDate.value)) {
-									if (time1GreaterThanTime2(startDate.value, endDate.value)) {
-										plus.nativeUI.toast("证件起始日不能大于或等于证件到期日");
-									} else {
-										//鉴权								
+					if(checkLength(startDate, '证件起始日:', 8)){
+						if(checkLengthEnd(startDate, endDate,"证件到期日",8)){
+							if (checknull(accountNo, "绑定卡号")) {
+								if (checkphoneSi(shjihaom)) {
+									//鉴权								
+									var reqData = {
+										"zhjnzlei": "10",
+										"zhjhaoma": certNo.value,
+										"lyzhzhao": accountNo.value,
+										"jiyijigo": '601108',
+										"jiyiguiy": 'DZ0012',
+										"yanzhenma": '',
+										"yanzmals": '',
+										"actionFlag": "00",
+										"channelCode": '030',
+										"currentBusinessCode": "",
+										"kehuzhwm": userName.value,
+										"shjihaom": shjihaom.value
+									};
+									apiSend('post', 'eleAccCheckUserInfoForMobile.do', reqData, returnFl, returnFail, true);
+									function returnFl(data) {
+										returnFlag = data.returnFlag;
+										// 下一页
 										var reqData = {
-											"zhjnzlei": "10",
-											"zhjhaoma": certNo.value,
-											"lyzhzhao": accountNo.value,
-											"jiyijigo": '601108',
-											"jiyiguiy": 'DZ0012',
-											"yanzhenma": '',
-											"yanzmals": '',
-											"actionFlag": "00",
+											"pictureFlowNo1": pictureFlowNo1,
+											"pictureFlowNo2": pictureFlowNo1,
+											"pictureFlowNo3": pictureFlowNo1,
+											"baseStr": checkFace3,
+											"tranType": "0",
+											"currentBusinessCode": '',
+											"accountNo": '',
+											"fileFlowNo": '',
 											"channelCode": '030',
-											"currentBusinessCode": "",
-											"kehuzhwm": userName.value,
-											"shjihaom": shjihaom.value
-										};
-										apiSend('post', 'eleAccCheckUserInfoForMobile.do', reqData, returnFl, returnFail, true);
-										function returnFl(data) {
-											returnFlag = data.returnFlag;
-											// 下一页
-											var reqData = {
-												"pictureFlowNo1": pictureFlowNo1,
-												"pictureFlowNo2": pictureFlowNo1,
-												"pictureFlowNo3": pictureFlowNo1,
-												"baseStr": checkFace3,
-												"tranType": "0",
-												"currentBusinessCode": '',
-												"accountNo": '',
-												"fileFlowNo": '',
-												"channelCode": '030',
-												"certNo": certNo.value,
-												"userName": userName.value
-											}
-											apiSend('post', 'eleAccAppOnlineCheck.do', reqData, faceFun, null, true);
+											"certNo": certNo.value,
+											"userName": userName.value
 										}
-										function returnFail() {
-											plus.nativeUI.toast("鉴权失败");
-										}
+										apiSend('post', 'eleAccAppOnlineCheck.do', reqData, faceFun, null, true);
 									}
-								} else {
-									plus.nativeUI.toast("证件已过期！");
+									function returnFail() {
+										plus.nativeUI.toast("鉴权失败");
+									}
 								}
+
 							}
+
 						}
 					}
+					// if (checkDate(startDate.value, "证件起始日")) {
+					// 	if (checkDate(endDate.value, "证件到期日")) {
+					// 		if (compareDateWithToday(endDate.value)) {
+					// 			if (time1GreaterThanTime2(startDate.value, endDate.value)) {
+					// 				plus.nativeUI.toast("证件起始日不能大于或等于证件到期日");
+					// 			} else {
+									
+					// 			}
+					// 		} else {
+					// 			plus.nativeUI.toast("证件已过期！");
+					// 		}
+
+					// 	}
+					// }
 				}
 			}
 

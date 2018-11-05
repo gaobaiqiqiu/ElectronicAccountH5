@@ -1,5 +1,6 @@
 ﻿<!doctype html>
 <html>
+
 <head>
 	<meta charset="UTF-8">
 	<title>注册</title>
@@ -19,39 +20,54 @@
 			padding: 0 25px;
 		}
 
-		.form_list {
+		/* .form_list {
 			height: 1.6rem !important;
 			line-height: 1.6rem !important;
-		}
+		} */
 
 		.form_list_right {
 			width: 67%;
-			padding-right: 60px !important;
+			/* padding-right: 60px !important; */
 			display: table;
 		}
 
 		.mui-input-row label {
 			width: 33%;
-			padding: 0;
+			padding: 0.6rem 0 0 0;
 			font-size: 0.7rem;
 		}
 
 		.mui-input-row label~input {
 			width: 67%;
-			line-height: 2rem;
-			height: 2rem;
+			padding: 0rem;
+			/* line-height: 0rem; */
+			height: 1.6rem;
 			font-size: 0.7rem;
 		}
 
 		.form_list_right input {
 			width: 100%;
 			padding: 10px 0 !important;
-			line-height: 2rem;
-			height: 2rem;
+			height: 1.6rem;
 			font-size: 0.7rem;
+			caret-color: #070708;
 		}
-
+		.form_list{
+			height: 1.6rem !important;
+		}
 		.form_list input::-webkit-input-placeholder {
+			color: #aab2bd;
+			font-size: 0.6rem !important;
+		}
+		.form_list textarea {
+			width: 67% !important;
+			padding: 0.5rem 0 !important;
+			height: 100%;
+			font-size: 0.7rem;
+			caret-color: #070708;
+			overflow-y:hidden;
+		}
+		.form_list textarea::-webkit-input-placeholder {
 			color: #aab2bd;
 			font-size: 0.6rem !important;
 		}
@@ -128,6 +144,7 @@
 </head>
 
 <body>
+	
 	<header class="mui-bar mui-bar-nav statusbar">
 		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 		<h1 class="mui-title">注册</h1>
@@ -165,40 +182,41 @@
 		<div class="mui-input-group form_item form_item_botton">
 			<div class="mui-input-row form_list">
 				<label>姓名</label>
-				<input id="userName" type="text" class="w30" maxlength="20" placeholder="请输入您的真实姓名">
+				<!-- <input id="userName" oninput="if(value.length>50)value=value.slice(0,50)" type="text" class="w30" placeholder="请输入您的真实姓名"> -->
+				<textarea id="userName" oninput="if(value.length>50)value=value.slice(0,50)" wrap="hard" placeholder="请输入您的真实姓名"></textarea>
 				<!--<span class="mui-icon mui-icon-camera scanicon" id="scanUserName"></span>-->
 			</div>
 			<div class="mui-input-row form_list">
 				<label>身份证号</label>
 				<div class="form_list_right">
-					<input id="certNo" maxlength="20" type="number" class="w30" placeholder="请输入您的身份证号码">
+					<input id="certNo" oninput="if(value.length>18)value=value.slice(0,18)" type="number" class="w30" placeholder="请输入您的身份证号码">
 					<!--<span class="mui-icon mui-icon-camera scanicon" id="scanCertNo"></span>-->
 				</div>
 			</div>
 			<div class="mui-input-row form_list">
 				<label>证件起始日</label>
 				<div class="form_list_right">
-					<input id="startDate" maxlength="8" type="number" class="w30" placeholder="例:20201020">
+					<input id="startDate" oninput="if(value.length>8)value=value.slice(0,8)" type="number" class="w30" placeholder="例:20201020">
 					<!--<span class="mui-icon mui-icon-camera scanicon" id="scanStartDate"></span>-->
 				</div>
 			</div>
 			<div class="mui-input-row form_list">
 				<label>证件到期日</label>
 				<div class="form_list_right">
-					<input id="endDate" maxlength="8" type="number" class="w30" placeholder="例:20201020">
+					<input id="endDate" oninput="if(value.length>8)value=value.slice(0,8)" type="number" class="w30" placeholder="例:20201020">
 					<!--<span class="mui-icon mui-icon-camera scanicon" id="scanEndDate"></span>-->
 				</div>
 			</div>
 			<div class="mui-input-row form_list">
 				<label>绑定卡号</label>
 				<div class="form_list_right">
-					<input id="accountNo" type="tel" pattern="[0-9]*" maxlength="20" class="w30" placeholder="请输入您的储蓄卡号">
+					<input id="accountNo" type="tel" pattern="[0-9]*" oninput="if(value.length>32)value=value.slice(0,32)" class="w30" placeholder="请输入您的储蓄卡号">
 					<!--<span class="mui-icon mui-icon-camera scanicon" id="scanAccountNo"></span>-->
 				</div>
 			</div>
 			<div class="mui-input-row form_list">
 				<label>手机号</label>
-				<input id="mobileNo" maxlength="11" type="tel" class="w30" placeholder="请输入储蓄卡预留手机号">
+				<input id="mobileNo" oninput="if(value.length>11)value=value.slice(0,11)" type="tel" class="w30" placeholder="请输入储蓄卡预留手机号">
 			</div>
 		</div>
 	</div>
@@ -214,7 +232,6 @@
 	<script src="../../js/plugin/plugin-idcard.js" type="text/javascript" charset="utf-8"></script>
 	<script src="../../js/controllers/regist/regist.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript">
-
 		/*控制页面的高度*/
 		document.documentElement.style.fontSize = innerWidth / 16 + 'px';
 		onresize = function () {
@@ -225,7 +242,17 @@
 			//状态栏参数：true - 全屏;false - 不全屏
 			// plus.navigator.setFullscreen(true);
 			plus.webview.currentWebview().setStyle({ scrollIndicator: 'none' });
+
+			//证件日期
+			$('#startDate').blur(function () {
+				checkLength(this, '证件起始日:', 8)
+			});
+			$('#endDate').blur(function () {
+				var startVal = $('#startDate')[0];
+				checkLengthEnd(startVal,this,"证件到期日",8);
+			});
 		});
+
 
 		// 检测姓名
 		$('#userName').blur(function () {
@@ -319,68 +346,15 @@
 			}
 		})
 
-		//证件日期
-		$('#startDate').blur(function () {
-			checkLength(this, '证件起始日:', 8)
-		});
-		$('#endDate').blur(function () {
-			checkLength(this, '证件到期日:', 8)
-		});
-
-		function checkLength(psdObj, tit, num) {
-			var psd = psdObj.value
-			if (psd.length != num) {
-				console.log(tit + "长度必须为" + num + "位纯数字");
-				psdObj.style.color = "red";
-				return false;
-			} else {
-				psdObj.style.color = "#000";
-				return true;
-			}
-		}
-
 		//银行卡
 		$('#accountNo').blur(function () {
 			accountNoLength(this, '银行卡号', 15, 18)
 		})
-		function accountNoLength(psdObj, tit, num1, num2) {
-			var psd = psdObj.value;
-			if (psd.length != '') {
-				if (psd.length < num1 || psd.length > num2) {
-					console.log("请输入长度为" + num1 + "或" + num2 + "位纯数字的" + tit);
-					psdObj.style.color = 'red';
-				} else {
-					psdObj.style.color = '#000';
-					return true;
-				}
-			} else {
-				console.log('卡号不能为空')
-			}
-		}
-
+		
 		//手机号校验
-		$('#mobileNo').blur(function(){
-			checkphone(this);
+		$('#mobileNo').blur(function () {
+			checkphoneSi(this);
 		})
-		function checkphone(phoneObj) {
-			var regu = /^[1][3,5,7,8][0-9]{9}$/;
-			var re = new RegExp(regu);
-			var phone = phoneObj.value;
-			if (phone == "" || phone == null) {
-				console.log("手机号不能为空");
-				phoneObj.style.color = "red";
-				return false;
-			} else if (re.test(phone)) {
-				phoneObj.style.color = "#000";
-				return true;
-			} else {
-				console.log("手机号格式有误");
-				phoneObj.style.color = "red";
-				return false;
-			}
-		}
-
-
 
 	</script>
 </body>

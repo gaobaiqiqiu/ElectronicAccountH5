@@ -13,29 +13,16 @@
 	var confirmPwd;
 	var verificationP;  //获取验证码
 	// var mobileNo;
-	// var professionalId; //职业
-	var professionalUl;
-	var professionalUlCh;
-	var professionalInp;
-	var professionalSpan;
-
-	// var addressTypeId; //地址类型
-	var addressTypeUl;
-	var addressTypeUlCh;
-	var addressTypeInp;
-	var addressTypeSpan;
-
-
+	var professionalId; //职业
+	var professionalIdJson; //对象
+	var addressTypeId; //地址类型
+	var addressTypeIdJson; //对象
 	var addressD; //详细地址
+	var useId; //用途
+	var useIdJson; //对象
 
-	// var useId; //用途
-	var useIdUl;
-	var useIdUlCh;
-	var useIdInp;
-	var useIdSpan;
 
-	var agreementCo; //协议
-	var mobileVerifyCode;
+	// var mobileVerifyCode;  
 	// var verifyCodeSequence; //验证码序列号
 	var srandNum; //随机因子
 	var inputCheck; //复选框
@@ -45,6 +32,7 @@
 
 	var dizhleix; //地址类型的value值
 	var zhiyeeee; //职业的value值
+	var zhhuyotu; //用途的value值
 
 	var userName; //用户名
 	var certNo; //证件号
@@ -53,6 +41,7 @@
 	var compareResult;  //相似度的对比
 	var yanzhema;  //手机验证码
 	var yanzmals;  //手机验证码流水
+	var jiaoymma;  //校验密码
 
 
 	//初始化页面
@@ -80,93 +69,57 @@
 		confirmPwd = document.getElementById("confirmPwd");
 		verificationP = document.getElementById("verificationP");
 		// mobileNo = document.getElementById("mobileNo");
-		//职业
-		// professionalId = document.getElementById("professionalId");
-		professionalUl = document.querySelector('.professional .professional_ul');
-		professionalUlCh = professionalUl.children;
-		professionalInp = document.querySelector('.professional .professional_inp');
-		professionalSpan = professionalInp.children[0];
-		//地址类型
-		// addressTypeId = document.getElementById("addressTypeId");
-		addressTypeUl = document.querySelector('.addressType .professional_ul');
-		addressTypeUlCh = addressTypeUl.children;
-		addressTypeInp = document.querySelector('.addressType .professional_inp');
-		addressTypeSpan = addressTypeInp.children[0];
 
 		// 复选框
-		inputCheck = document.querySelector('.agreementLa input');
+		inputCheck = document.querySelector('#clickInp');
 
-
-		addressD = document.getElementById("addressD");
-		//用途
-		// useId = document.getElementById("useId");
-		useIdUl = document.querySelector('.use .professional_ul');
-		useIdUlCh = useIdUl.children;
-		useIdInp = document.querySelector('.use .professional_inp');
-		useIdSpan = useIdInp.children[0];
-
-		//协议
-		agreementCo = document.querySelector(".agreementCo");
-		console.log(agreementCo)
-
-		mobileVerifyCode = document.getElementById("mobileVerifyCode");
+		// 获取验证码
 		vertifyBtn = document.getElementById("vertifyBtn");
 
-
-		//光标移出
-		document.addEventListener("tap", function () {
-			loginPwd.value = loginPwd.value.replace("|", "");
-			confirmPwd.value = confirmPwd.value.replace("|", "");
-		})
-
-
 		// 职业
-		professionalInp.onclick = function () {
-			professionalUl.style.display = "block";
-			addressTypeUl.style.display = "none";
-			useIdUl.style.display = "none";
+		professionalId = document.querySelector('.professional input')
+		professionalIdJson = {
+			"国家机关、党群组织、企业、事业单位负责人": '000',
+			"专业技术人员": '100',
+			"办事人员和有关人员": '300',
+			"商业、服务业人员": '400',
+			"农、林、牧、渔、水利业生产人员": '500',
+			"生产、运输设备操作人员及有关人员": '600',
+			"军人": 'X00',
+			"不便分类的其他从业人员": 'Y00',
+			"自由职业": 'Y01',
+			"家庭主妇": 'Y02',
+			"学生": 'Y03',
+			"退休": 'Y04'
 		}
-		for (var i = 0; i < professionalUlCh.length; i++) {
-			professionalUlCh[i].onclick = function () {
-				zhiyeeee = this.attributes[0].nodeValue; 
-				console.log(this.attributes[0].nodeValue)
-				professionalSpan.innerHTML = this.innerHTML;
-				professionalUl.style.display = "none";
-			}
-		}
-
 		//地址类型
-		addressTypeInp.onclick = function () {
-			professionalUl.style.display = "none";
-			addressTypeUl.style.display = "block";
-			useIdUl.style.display = "none";
+		addressTypeId = document.querySelector('.addressType input')
+		addressTypeIdJson = {
+			"住宅地址": '10',
+			"单位地址（外汇专用）": '20',
+			"联系（通讯）地址": '30',
+			"综合账单地址": '40',
+			"信用卡账单地址": '50',
+			"英文地址": '60',
+			"住宅地址（信用卡专用）": '70',
+			"单位地址（信用卡专用）": '80',
+			"单位全称（信用卡专用）": '90',
+			"营业地址": 'A0',
+			"注册地址": 'B0'
 		}
-		for (var i = 0; i < addressTypeUlCh.length; i++) {
-			addressTypeUlCh[i].onclick = function () {
-				dizhleix = this.attributes[0].nodeValue;
-				console.log(this.attributes[0].nodeValue)
-				addressTypeSpan.innerHTML = this.innerHTML;
-				addressTypeUl.style.display = "none";
-			}
+		// 详细地址
+		addressD = document.getElementById("addressD");
+		// 用途
+		useId = document.querySelector('.use input')
+		useIdJson = {
+			"代发工资": '4001',
+			"储蓄": '4002',
+			"社保医疗": '4003',
+			"投资理财": '4004',
+			"偿还贷款": '4005',
+			"处理日常开支": '4006'
 		}
 
-		//用途
-		useIdInp.onclick = function () {
-			professionalUl.style.display = "none";
-			addressTypeUl.style.display = "none";
-			useIdUl.style.display = "block";
-		}
-		for (var i = 0; i < useIdUlCh.length; i++) {
-			useIdUlCh[i].onclick = function () {
-				useIdSpan.innerHTML = this.innerHTML;
-				useIdUl.style.display = "none";
-			}
-		}
-
-		//协议
-		agreementCo.onclick = function () {
-			window.location.href = 'regist_agree.html';
-		}
 
 		var types = {}
 		types[plus.networkinfo.CONNECTION_UNKNOW] = "未知";
@@ -187,52 +140,16 @@
 			uuID = plus.device.imei;
 		};
 
-		var pwd;
-		var pwd1;
-
-		//密码键盘
-		loginPwd.addEventListener("click", function () {
-			this.value = "|";
-			var pwdId = this.id;
-			console.log('交易密码')
-			// openKeyBoard(pwdId);
-		});
-
-		confirmPwd.addEventListener("click", function () {
-			this.value = "|";
-			var pwdId = this.id;
-			//openKeyBoard(pwdId);
-		});
-
-		//弹出键盘
-		// function openKeyBoard(id) {
-		// 	var bId = id;
-		// 	var random = srandNum;
-		// 	var isNumber = false;
-		// 	var confuse = 0;
-		// 	var maxLenth = 20;
-		// 	var isRegex = false;
-		// 	var type = "AES";
-		// 	plus.key.showSoftKeybord(bId, random, isNumber, confuse, maxLenth, isRegex, type, function (result) {
-		// 		if (result) {
-		// 			document.getElementById(bId).value = result.text + "|";
-		// 			if (bId == "loginPwd") {
-		// 				pwd = result.aes;
-		// 			} else if (bId == "confirmPwd") {
-		// 				pwd1 = result.aes;
-		// 			}
-		// 		} else {
-		// 			mui.alert(result.message);
-		// 		}
-		// 	}, function (result) {
-		// 		mui.alert("调用插件时发生异常");
-		// 	});
-		// };
 
 		//获取验证码
 		vertifyBtn.addEventListener("click", function () {
+			var shoujihm = shjihaom + "";
+			console.log(shoujihm)
+			var shjihaomLeft = shoujihm.Substring(0, 3);
+			var shjihaomRight = shoujihm.Substring(shoujihm.length - 4);
+			console.log(shjihaomLeft, shjihaomRight)
 			//已发送短信--提示信息显示
-			verificationP.children[0].innerHTML = shjihaom;
+			verificationP.children[0].innerHTML = shjihaomLeft + "****" + shjihaomRight;
 			verificationP.style.display = 'block';
 
 			// 验证码
@@ -275,9 +192,43 @@
 		})
 
 
-
 		//下一步
 		document.getElementById("nextPage").addEventListener('tap', function () {
+			// 职业类型
+			for (var item in professionalIdJson) {
+				if (item == professionalId.value) {
+					zhiyeeee = professionalIdJson[item];
+					return true;
+				} else {
+					plus.nativeUI.toast("请选择职业类型");
+					return false;
+				}
+			}
+			//地址类型
+			for (var item in addressTypeIdJson) {
+				if (item == addressTypeId.value) {
+					dizhleix = addressTypeIdJson[item];
+					return true;
+				} else {
+					plus.nativeUI.toast("请选择地址类型");
+					return false;
+				}
+			}
+			//用途
+			for (var item in useIdJson) {
+				if (item == useId.value) {
+					zhhuyotu = useIdJson[item];
+					return true;
+				} else {
+					plus.nativeUI.toast("请选择用途");
+					return false;
+				}
+			}
+			// 详细地址
+			if (addressD.value == '') {
+				plus.nativeUI.toast("详细地址不能为空");
+				return false;
+			}
 			//校验
 			function timer() {
 				var date = new Date();
@@ -295,119 +246,72 @@
 				return year.toString() + mon + da.toString() + h + m.toString() + s;
 			}
 
-
-			// var reqData = {
-			// 	"zhjnzlei": "10",
-			// 	"zhjhaoma": "542626198001019994",
-			// 	"kehuzhwm": "个网十",
-			// 	"kehuhaoo": "",
-			// 	"jiaoymma": "UYAutuI2bnj3uEEAbGBk0Q==",
-			// 	"zhshuxin": "002",
-			// 	"lyzhzhao": "6230730028402676",
-			// 	"lyzhumcc": "",
-			// 	"fkzhzftj": "",
-			// 	"shjihaom": "13900000010",
-			// 	"shifoubz": "1",
-			// 	"zhahuhmc": "",
-			// 	"kaihjigo": "",
-			// 	"yanzhema": yanzhema,
-			// 	"channelCode": "030",
-			// 	"jiyijigo": "601108",
-			// 	"jiyiguiy": "DZ0007",
-			// 	"currentBusinessCode": "12000043",
-			// 	"batchNo": "20181029_652_558_1438EB4D-E764-504E-8072-23DFD4959B2F-1",
-			// 	"transferTime": timer(),
-			// 	"picturePath1": "",
-			// 	"picturePath2": "",
-			// 	"picturePath3": "",
-			// 	"picturePath4": "",
-			// 	"picturePath5": "",
-			// 	"Descrip": "00",
-			// 	"fileState": compareResult,
-			// 	"fileFlowNo": "SYSLOG201810290043312204",
-			// 	"yanzmals": "",
-			// 	"dizhleix": "30",
-			// 	"dizhneir": addressD.value,
-			// 	"zhiyeeee": "300",
-			// 	"srandNum": "sz5sbgcipdg85vvlcxnm6cq59yzg34f8",
-			// 	"lancreny": "",
-			// 	"lancrymc": "",
-			// 	"shouyren": "个网十",
-			// 	"zhhuyotu": "代发工资"
-			// }
-
-			//校验
-
-			// 详细地址
-			if (addressD.value == '') {
-				plus.nativeUI.toast("详细地址不能为空");
-				return false;
-			}
-
 			if (checknull(loginPwd.value, "登录密码")) {
 				if (checknull(confirmPwd.value, "确认密码")) {
-					if (checkupdpsd(pwd, pwd1)) {
+					if (checkupdpsd(loginPwd.value, confirmPwd.value)) {
 						if (checkphone(shjihaom)) {  //mobileNo需要动态获取
 							if (!tFlag) {
 								plus.nativeUI.toast("请先点击按钮获取验证码");
 								return false;
 							} else {
-								if (checknull(mobileVerifyCode.value, "验证码")) {
+								if (checknull(yanzhema, "验证码")) {
 									// 复选框是否被点击
 									if (inputCheck.checked != true) {
 										plus.nativeUI.toast("未同意协议");
 										return false;
 									}
-									//ajax
-									//apiSend('post', 'eleAccAppUserRegister.do', reqData, pwdsucFun, null, true);
-									// 开户
-									var reqData = {
-										"zhjnzlei": "10",
-										"zhjhaoma": certNo,
-										"kehuzhwm": userName,
-										"kehuhaoo": "",
-										"jiaoymma": "UYAutuI2bnj3uEEAbGBk0Q==",
-										"zhshuxin": "002",
-										"lyzhzhao": accountNo,
-										"lyzhumcc": "",
-										"fkzhzftj": "",
-										"shjihaom": shjihaom,
-										"shifoubz": "1",
-										"zhahuhmc": "",
-										"kaihjigo": "",
-										"yanzhema": yanzhema,
-										"channelCode": "030",
-										"jiyijigo": "601108",
-										"jiyiguiy": "DZ0007",
-										"currentBusinessCode": "12000043",
-										"batchNo": "20181029_652_558_1438EB4D-E764-504E-8072-23DFD4959B2F-1",
-										"transferTime": timer(),
-										"picturePath1": "",
-										"picturePath2": "",
-										"picturePath3": "",
-										"picturePath4": "",
-										"picturePath5": "",
-										"Descrip": "00",
-										"fileState": compareResult,
-										"fileFlowNo": "SYSLOG201810290043312204",
-										"yanzmals": yanzmals,
-										"dizhleix": dizhleix,
-										"dizhneir": addressD.value,
-										"zhiyeeee": zhiyeeee,
-										"srandNum": "sz5sbgcipdg85vvlcxnm6cq59yzg34f8",
-										"lancreny": "",
-										"lancrymc": "",
-										"shouyren": userName,
-										"zhhuyotu": "代发工资"
-									}
-									apiSend('post', 'eleAccOpneAccForMobile.do', reqData, loginsucFun, loginfailFun, true);
+									if (sb(passGuard1, passGuard2)) {
+										//只能调一次，再次调用passGuard1.getLength()的值为0，会弹出提示：密码不能为空！
+										jiaoymma = passGuard1.getOutput();
 
+										// 开户
+										var reqData = {
+											"zhjnzlei": "10",
+											"zhjhaoma": certNo,
+											"kehuzhwm": userName,
+											"kehuhaoo": "",
+											"jiaoymma": jiaoymma,
+											"zhshuxin": "002",
+											"lyzhzhao": accountNo,
+											"lyzhumcc": "",
+											"fkzhzftj": "",
+											"shjihaom": shjihaom,
+											"shifoubz": "1",
+											"zhahuhmc": "",
+											"kaihjigo": "",
+											"yanzhema": yanzhema,
+											"channelCode": "030",
+											"jiyijigo": "601108",
+											"jiyiguiy": "DZ0007",
+											"currentBusinessCode": "12000043",
+											"batchNo": "20181029_652_558_1438EB4D-E764-504E-8072-23DFD4959B2F-1",
+											"transferTime": timer(),
+											"picturePath1": "",
+											"picturePath2": "",
+											"picturePath3": "",
+											"picturePath4": "",
+											"picturePath5": "",
+											"Descrip": "00",
+											"fileState": compareResult,
+											"fileFlowNo": "SYSLOG201810290043312204",
+											"yanzmals": yanzmals,
+											"dizhleix": dizhleix,
+											"dizhneir": addressD.value,
+											"zhiyeeee": zhiyeeee,
+											"srandNum": "sz5sbgcipdg85vvlcxnm6cq59yzg34f8",
+											"lancreny": "",
+											"lancrymc": "",
+											"shouyren": userName,
+											"zhhuyotu": zhhuyotu
+										}
+										apiSend('post', 'eleAccOpneAccForMobile.do', reqData, loginsucFun, loginfailFun, true);
+									}
 								}
 							}
 						}
 					}
 				}
-			};
+			}
 		});
 
 		//设置密码成功
