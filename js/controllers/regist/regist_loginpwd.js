@@ -20,7 +20,7 @@
 	var addressD; //详细地址
 	var useId; //用途
 	var useIdJson; //对象
-
+	var agreementCo; //协议
 
 	// var mobileVerifyCode;  
 	// var verifyCodeSequence; //验证码序列号
@@ -30,9 +30,9 @@
 	var kehuzhao; //开户成功返回的账号
 	var em;  //开户失败的提示
 
-	var dizhleix; //地址类型的value值
-	var zhiyeeee; //职业的value值
-	var zhhuyotu; //用途的value值
+	// var dizhleix; //地址类型的value值
+	// var zhiyeeee; //职业的value值
+	// var zhhuyotu; //用途的value值
 
 	var userName; //用户名
 	var certNo; //证件号
@@ -43,7 +43,8 @@
 	var yanzmals;  //手机验证码流水
 	var jiaoymma;  //校验密码
 
-
+	var arr1;
+	var arr2;
 	//初始化页面
 	regist_loginpwd.init = function () {
 		console.log("regist_loginpwd 加载成功！");
@@ -57,7 +58,9 @@
 		certNo = self.certNo; //证件号
 		accountNo = self.accountNo; //账号
 		shjihaom = self.shjihaom; //手机号
-		console.log(shjihaom)
+		// 去掉空格
+		accountNo = accountNo.replace(/\s+/g, "");
+		shjihaom = shjihaom.replace(/\s+/g, "");
 		compareResult = self.compareResult; //相似度的对比
 
 		srandNum = stringSrand();
@@ -68,58 +71,25 @@
 		loginPwd = document.getElementById("loginPwd");
 		confirmPwd = document.getElementById("confirmPwd");
 		verificationP = document.getElementById("verificationP");
-		// mobileNo = document.getElementById("mobileNo");
-
 		// 复选框
 		inputCheck = document.querySelector('#clickInp');
-
 		// 获取验证码
 		vertifyBtn = document.getElementById("vertifyBtn");
 
 		// 职业
 		professionalId = document.querySelector('.professional input')
-		professionalIdJson = {
-			"国家机关、党群组织、企业、事业单位负责人": '000',
-			"专业技术人员": '100',
-			"办事人员和有关人员": '300',
-			"商业、服务业人员": '400',
-			"农、林、牧、渔、水利业生产人员": '500',
-			"生产、运输设备操作人员及有关人员": '600',
-			"军人": 'X00',
-			"不便分类的其他从业人员": 'Y00',
-			"自由职业": 'Y01',
-			"家庭主妇": 'Y02',
-			"学生": 'Y03',
-			"退休": 'Y04'
-		}
 		//地址类型
 		addressTypeId = document.querySelector('.addressType input')
-		addressTypeIdJson = {
-			"住宅地址": '10',
-			"单位地址（外汇专用）": '20',
-			"联系（通讯）地址": '30',
-			"综合账单地址": '40',
-			"信用卡账单地址": '50',
-			"英文地址": '60',
-			"住宅地址（信用卡专用）": '70',
-			"单位地址（信用卡专用）": '80',
-			"单位全称（信用卡专用）": '90',
-			"营业地址": 'A0',
-			"注册地址": 'B0'
-		}
 		// 详细地址
 		addressD = document.getElementById("addressD");
 		// 用途
 		useId = document.querySelector('.use input')
-		useIdJson = {
-			"代发工资": '4001',
-			"储蓄": '4002',
-			"社保医疗": '4003',
-			"投资理财": '4004',
-			"偿还贷款": '4005',
-			"处理日常开支": '4006'
-		}
 
+		//协议
+		agreementCo = document.querySelector(".agreementCo");
+		agreementCo.onclick = function () {
+			window.location.href = 'regist_agree.html';
+		}
 
 		var types = {}
 		types[plus.networkinfo.CONNECTION_UNKNOW] = "未知";
@@ -145,8 +115,8 @@
 		vertifyBtn.addEventListener("click", function () {
 			var shoujihm = shjihaom + "";
 			console.log(shoujihm)
-			var shjihaomLeft = shoujihm.Substring(0, 3);
-			var shjihaomRight = shoujihm.Substring(shoujihm.length - 4);
+			var shjihaomLeft = shoujihm.substr(0,3);
+			var shjihaomRight = shoujihm.substr(shoujihm.length - 4);
 			console.log(shjihaomLeft, shjihaomRight)
 			//已发送短信--提示信息显示
 			verificationP.children[0].innerHTML = shjihaomLeft + "****" + shjihaomRight;
@@ -162,8 +132,6 @@
 			//验证码成功
 			function vertifyFun(result) {
 				plus.nativeUI.toast("验证码发送成功");
-				// verifyCodeSequence = result.verifyCodeSequence;
-				// console.log(verifyCodeSequence)
 				yanzhema = result.yanzhema;
 				yanzmals = result.yanzmals;
 				tFlag = true;
@@ -191,42 +159,34 @@
 			}
 		})
 
+		
+
 
 		//下一步
 		document.getElementById("nextPage").addEventListener('tap', function () {
+			// 复选框是否被点击
+			if (inputCheck.checked != true) {
+				plus.nativeUI.toast("未同意协议");
+				return false;
+			}
 			// 职业类型
-			for (var item in professionalIdJson) {
-				if (item == professionalId.value) {
-					zhiyeeee = professionalIdJson[item];
-					return true;
-				} else {
-					plus.nativeUI.toast("请选择职业类型");
-					return false;
-				}
+			if(zhiyeeee == undefined){
+				plus.nativeUI.toast("请选择职业类型");
+				return false;
 			}
-			//地址类型
-			for (var item in addressTypeIdJson) {
-				if (item == addressTypeId.value) {
-					dizhleix = addressTypeIdJson[item];
-					return true;
-				} else {
-					plus.nativeUI.toast("请选择地址类型");
-					return false;
-				}
-			}
-			//用途
-			for (var item in useIdJson) {
-				if (item == useId.value) {
-					zhhuyotu = useIdJson[item];
-					return true;
-				} else {
-					plus.nativeUI.toast("请选择用途");
-					return false;
-				}
+			// 地址类型
+			if(dizhleix == undefined){
+				plus.nativeUI.toast("请选择地址类型");
+				return false;
 			}
 			// 详细地址
 			if (addressD.value == '') {
 				plus.nativeUI.toast("详细地址不能为空");
+				return false;
+			}
+			// 用途
+			if(zhhuyotu == undefined){
+				plus.nativeUI.toast("请选择用途");
 				return false;
 			}
 			//校验
@@ -255,11 +215,6 @@
 								return false;
 							} else {
 								if (checknull(yanzhema, "验证码")) {
-									// 复选框是否被点击
-									if (inputCheck.checked != true) {
-										plus.nativeUI.toast("未同意协议");
-										return false;
-									}
 									if (sb(passGuard1, passGuard2)) {
 										//只能调一次，再次调用passGuard1.getLength()的值为0，会弹出提示：密码不能为空！
 										jiaoymma = passGuard1.getOutput();

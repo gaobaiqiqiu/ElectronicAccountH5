@@ -35,7 +35,6 @@
 	//初始化数据
 	regist.initData = function () {
 		self = plus.webview.currentWebview();
-
 		plus.navigator.setStatusBarStyle('dark'); //状态栏
 		imgWidth = jQuery(".upload_img").innerWidth();
 		jQuery(".upload_img").height(imgWidth / 1.6);
@@ -56,7 +55,7 @@
 		} else {
 			uuID = plus.device.imei;
 		}
-		console.log(userName.value)
+		// console.log(userName.value)
 		//监听侧滑
 		self.addEventListener('popGesture', function (e) {
 			if (e.type == "end" && !e.result) {
@@ -65,7 +64,7 @@
 				plus.navigator.setStatusBarStyle('light');
 			}
 		})
-		console.log(shjihaom.value)
+		// console.log(shjihaom.value)
 		//重置返回
 		var old_back = mui.back;
 		mui.back = function () {
@@ -325,8 +324,6 @@
 					return
 				}
 			}
-			console.log(certNo.value)
-			console.log(shjihaom.value)
 			//校验身份证
 			if (checkUserName(userName.value)) {
 				if (isCardID(certNo.value)) {
@@ -334,6 +331,8 @@
 						if(checkLengthEnd(startDate, endDate,"证件到期日",8)){
 							if (checknull(accountNo, "绑定卡号")) {
 								if (checkphoneSi(shjihaom)) {
+									accountNo.value = accountNo.value.replace(/\s+/g,"");
+									shjihaom.value = shjihaom.value.replace(/\s+/g,"");
 									//鉴权								
 									var reqData = {
 										"zhjnzlei": "10",

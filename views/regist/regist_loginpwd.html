@@ -149,10 +149,10 @@
 		}
 		/* 验证码 */
 		#verificationP{
-			padding-left: 20px;
-			padding-bottom: 5px;
-			font-size: 15px;
-			display: none;
+			padding-left: 1.5rem;
+    		padding-top: 0.5rem;
+    		font-size: 1rem;
+    		display: none;
 		}
 		#verificationP span{
 			color: red;
@@ -160,10 +160,10 @@
 		/* 协议*/
 		.agreementLa{
 			padding-left: 1.3rem;
-    		padding-top: 1rem;
-			padding-bottom: 0.5rem;
-    		font-size: 0.9rem;
-    		display: block;
+   			padding-top: 0.5rem;
+   			padding-bottom: 0.5rem;
+   			font-size: 0.9rem;
+   			display: block;
 		}
 		.agreementLa input{
 			height: 1rem;
@@ -414,11 +414,11 @@
 				Show = 0;
 			}, 100);
 		};
-		//协议
-		var agreementCo = document.querySelector(".agreementCo");
-		agreementCo.onclick = function () {
-			window.location.href = 'regist_agree.html';
-		}
+
+		var zhiyeeee; //职业的value值
+		var dizhleix; //地址类型的value值
+		var zhhuyotu; //用途的value值
+
 		// 职业
 		$('#professional').mobiscroll().select({
 			theme: 'default',
@@ -426,7 +426,42 @@
 			display: 'bottom',
 			lang: 'zh',
 			animate: 'fade',
-			rows: 5
+			rows: 5,
+			onSelect: function (valueText, inst) {
+				var zylx = [
+					"国家机关、党群组织、企业、事业单位负责人",
+					"专业技术人员",
+					"办事人员和有关人员",
+					"商业、服务业人员",
+					"农、林、牧、渔、水利业生产人员",
+					"生产、运输设备操作人员及有关人员",
+					"军人",
+					"不便分类的其他从业人员",
+					"自由职业",
+					"家庭主妇",
+					"学生",
+					"退休"
+				]
+				var zylx2 = [
+					'000',
+					'100',
+					'300',
+					'400',
+					'500',
+					'600',
+					'X00',
+					'Y00',
+					'Y01',
+					'Y02',
+					'Y03',
+					'Y04'
+				]
+				for (var i = 0; i < zylx.length; i++) {
+					if (zylx[i] == valueText) {
+						zhiyeeee = zylx2[i]
+					}
+				}
+			}
 		});
 		// 地址类型
 		$('#addressType').mobiscroll().select({
@@ -435,7 +470,40 @@
 			display: 'bottom',
 			lang: 'zh',
 			animate: 'fade',
-			rows: 5
+			rows: 5,
+			onSelect: function (valueText, inst) {
+				var dzlx = [
+					"住宅地址",
+					"单位地址（外汇专用）",
+					"联系（通讯）地址",
+					"综合账单地址",
+					"信用卡账单地址",
+					"英文地址",
+					"住宅地址（信用卡专用）",
+					"单位地址（信用卡专用）",
+					"单位全称（信用卡专用）",
+					"营业地址",
+					"注册地址"
+				]
+				var dzlx2 = [
+					'10',
+					'20',
+					'30',
+					'40',
+					'50',
+					'60',
+					'70',
+					'80',
+					'90',
+					'A0',
+					'B0'
+				]
+				for (var i = 0; i < dzlx.length; i++) {
+					if (dzlx[i] == valueText) {
+						dizhleix = dzlx2[i]
+					}
+				}
+			}
 		});
 		// 用途
 		$('#use').mobiscroll().select({
@@ -444,7 +512,30 @@
 			display: 'bottom',
 			lang: 'zh',
 			animate: 'fade',
-			rows: 5
+			rows: 5,
+			onSelect: function (valueText, inst) {
+				var yt = [
+					"代发工资",
+					"储蓄",
+					"社保医疗",
+					"投资理财",
+					"偿还贷款",
+					"处理日常开支"
+				]
+				var yt2 = [
+					'4001',
+					'4002',
+					'4003',
+					'4004',
+					'4005',
+					'4006'
+				]
+				for (var i = 0; i < yt.length; i++) {
+					if (yt[i] == valueText) {
+						zhhuyotu = yt2[i]
+					}
+				}
+			}
 		});
 
 	</script>

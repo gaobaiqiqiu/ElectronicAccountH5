@@ -616,18 +616,19 @@ function checkphoneSi(phoneObj) {
 	var regu = /^[1][3,5,7,8][0-9]{9}$/;
 	var re = new RegExp(regu);
 	var phone = phoneObj.value;
+	phone = phone.replace(/\s+/g,"");
 	if (phone == "" || phone == null) {
-		console.log("手机号不能为空");
+		plus.nativeUI.toast("手机号不能为空");
 		phoneObj.style.color = "red";
 		return false;
 	} else if (re.test(phone)) {
 		phoneObj.style.color = "#000";
-		var phoneObjVa = phoneObj.value;
-		phoneObjVa = phoneObjVa.substring(0, 3) + ' ' + phoneObjVa.substring(3, 7) + ' ' + phoneObjVa.substring(7, 11);
-		phoneObj.value = phoneObjVa;
+		// var phoneObjVa = phoneObj.value;
+		phone = phone.substring(0, 3) + ' ' + phone.substring(3, 7) + ' ' + phone.substring(7, 11);
+		phoneObj.value = phone;
 		return true;
 	} else {
-		console.log("手机号格式有误");
+		plus.nativeUI.toast("手机号格式有误");
 		phoneObj.style.color = "red";
 		return false;
 	}
@@ -636,10 +637,10 @@ function checkphoneSi(phoneObj) {
 // 银行卡号
 function accountNoLength(psdObj, tit, num1, num2) {
 	var psd = psdObj.value;
-	console.log(psd)
+	psd = psd.replace(/\s+/g,"");
 	if (psd.length != '') {
 		if (psd.length < num1 || psd.length > num2) {
-			console.log("请输入长度为" + num1 + "或" + num2 + "位纯数字的" + tit);
+			plus.nativeUI.toast("请输入长度为" + num1 + "或" + num2 + "位纯数字的" + tit);
 			psdObj.style.color = 'red';
 		} else {
 			psdObj.style.color = '#000';
@@ -648,6 +649,6 @@ function accountNoLength(psdObj, tit, num1, num2) {
 			return true;
 		}
 	} else {
-		console.log('卡号不能为空')
+		plus.nativeUI.toast('卡号不能为空')
 	}
 }
