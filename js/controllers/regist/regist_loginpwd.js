@@ -3,6 +3,7 @@
  * @param {Object} $
  * @param {Object} workList
  */
+
 (function ($, regist_loginpwd) {
 	mui.init();
 	var self;
@@ -30,9 +31,9 @@
 	var kehuzhao; //开户成功返回的账号
 	var em;  //开户失败的提示
 
-	// var dizhleix; //地址类型的value值
-	// var zhiyeeee; //职业的value值
-	// var zhhuyotu; //用途的value值
+	var zhiyeeee; //职业的value值
+	var dizhleix; //地址类型的value值
+	var zhhuyotu; //用途的value值
 
 	var userName; //用户名
 	var certNo; //证件号
@@ -43,8 +44,8 @@
 	var yanzmals;  //手机验证码流水
 	var jiaoymma;  //校验密码
 
-	var arr1;
-	var arr2;
+	var sb;
+
 	//初始化页面
 	regist_loginpwd.init = function () {
 		console.log("regist_loginpwd 加载成功！");
@@ -59,8 +60,31 @@
 		accountNo = self.accountNo; //账号
 		shjihaom = self.shjihaom; //手机号
 		// 去掉空格
-		accountNo = accountNo.replace(/\s+/g, "");
-		shjihaom = shjihaom.replace(/\s+/g, "");
+		if (accountNo != undefined) {
+			accountNo = accountNo.replace(/\s+/g, "");
+		}
+		if (shjihaom != undefined) {
+			shjihaom = shjihaom.replace(/\s+/g, "");
+		}
+
+		// 提交方法
+		sb = function sb(sb1, sb2) {
+			//判断密码长度
+			if (sb1.getLength() == 0) {
+				alert("密码不能为空！");
+				return false;
+			}
+			if (sb2.getLength() == 0) {
+				alert("密码不能为空！");
+				return false;
+			}
+			if (sb1.getHash() != sb2.getHash()) {
+				alert("新密码和确认密码不一致！");
+				return false;
+			} else {
+				return true;
+			}
+		}
 		compareResult = self.compareResult; //相似度的对比
 
 		srandNum = stringSrand();
@@ -77,13 +101,14 @@
 		vertifyBtn = document.getElementById("vertifyBtn");
 
 		// 职业
-		professionalId = document.querySelector('.professional input')
+		professionalId = document.querySelector('.professional span')
+		// console.log(professionalId.value)
 		//地址类型
-		addressTypeId = document.querySelector('.addressType input')
+		addressTypeId = document.querySelector('.addressType span')
 		// 详细地址
 		addressD = document.getElementById("addressD");
 		// 用途
-		useId = document.querySelector('.use input')
+		useId = document.querySelector('.use span')
 
 		//协议
 		agreementCo = document.querySelector(".agreementCo");
@@ -115,7 +140,7 @@
 		vertifyBtn.addEventListener("click", function () {
 			var shoujihm = shjihaom + "";
 			console.log(shoujihm)
-			var shjihaomLeft = shoujihm.substr(0,3);
+			var shjihaomLeft = shoujihm.substr(0, 3);
 			var shjihaomRight = shoujihm.substr(shoujihm.length - 4);
 			console.log(shjihaomLeft, shjihaomRight)
 			//已发送短信--提示信息显示
@@ -158,8 +183,77 @@
 				tFlag = false;
 			}
 		})
+		// 职业
+		document.getElementById('professional').addEventListener("tap", function () {
+			var roadPick = new mui.PopPicker({ layer: 1 });
+			roadPick.Type = 5;
+			roadPick.setData([
+				{ value: "000", text: "国家机关、党群组织、企业、事业单位负责人" },
+				{ value: "100", text: "专业技术人员" },
+				{ value: "300", text: "办事人员和有关人员" },
+				{ value: "400", text: "商业、服务业人员" },
+				{ value: "500", text: "农、林、牧、渔、水利业生产人员" },
+				{ value: "600", text: "生产、运输设备操作人员及有关人员" },
+				{ value: "X00", text: "军人" },
+				{ value: "Y00", text: "不便分类的其他从业人员" },
+				{ value: "Y01", text: "自由职业" },
+				{ value: "Y02", text: "家庭主妇" },
+				{ value: "Y03", text: "学生" },
+				{ value: "Y04", text: "退休" }
+			]);
+			roadPick.show(function (items) {
+				// 被选中的文字
+				professionalId.innerHTML = (items[0] || {}).text;
+				// 传输的value值
+				zhiyeeee = (items[0] || {}).value;
 
-		
+			});
+		});
+		// 地址
+		document.getElementById('addressType').addEventListener("tap", function () {
+			var roadPick = new mui.PopPicker({ layer: 1 });
+			roadPick.Type = 5;
+			roadPick.setData([
+				{ value: "10", text: "住宅地址" },
+				{ value: "20", text: "单位地址（外汇专用）" },
+				{ value: "30", text: "联系（通讯）地址" },
+				{ value: "40", text: "综合账单地址" },
+				{ value: "50", text: "信用卡账单地址" },
+				{ value: "60", text: "英文地址" },
+				{ value: "70", text: "住宅地址（信用卡专用）" },
+				{ value: "80", text: "单位地址（信用卡专用）" },
+				{ value: "90", text: "单位全称（信用卡专用）" },
+				{ value: "A0", text: "营业地址" },
+				{ value: "B0", text: "注册地址" },
+			]);
+			roadPick.show(function (items) {
+				// 被选中的文字
+				addressTypeId.innerHTML = (items[0] || {}).text;
+				// 传输的value值
+				dizhleix = (items[0] || {}).value;
+			});
+		});
+		// 用途
+		document.getElementById('use').addEventListener("tap", function () {
+			var roadPick = new mui.PopPicker({ layer: 1 });
+			roadPick.Type = 5;
+			roadPick.setData([
+				{ value: "4001", text: "代发工资" },
+				{ value: "4002", text: "储蓄" },
+				{ value: "4003", text: "社保医疗" },
+				{ value: "4004", text: "投资理财" },
+				{ value: "4005", text: "偿还贷款" },
+				{ value: "4006", text: "处理日常开支" },
+			]);
+			roadPick.show(function (items) {
+				// 被选中的文字
+				useId.innerHTML = (items[0] || {}).text;
+				// 传输的value值
+				zhhuyotu = (items[0] || {}).value;
+			});
+		});
+
+
 
 
 		//下一步
@@ -169,13 +263,14 @@
 				plus.nativeUI.toast("未同意协议");
 				return false;
 			}
+			console.log(zhiyeeee, +"----," + dizhleix + "----," + addressD)
 			// 职业类型
-			if(zhiyeeee == undefined){
+			if (zhiyeeee == undefined) {
 				plus.nativeUI.toast("请选择职业类型");
 				return false;
 			}
 			// 地址类型
-			if(dizhleix == undefined){
+			if (dizhleix == undefined) {
 				plus.nativeUI.toast("请选择地址类型");
 				return false;
 			}
@@ -185,7 +280,7 @@
 				return false;
 			}
 			// 用途
-			if(zhhuyotu == undefined){
+			if (zhhuyotu == undefined) {
 				plus.nativeUI.toast("请选择用途");
 				return false;
 			}
@@ -215,7 +310,7 @@
 								return false;
 							} else {
 								if (checknull(yanzhema, "验证码")) {
-									if (sb(passGuard1, passGuard2)) {
+									if (sb.sb(passGuard1, passGuard2)) {
 										//只能调一次，再次调用passGuard1.getLength()的值为0，会弹出提示：密码不能为空！
 										jiaoymma = passGuard1.getOutput();
 

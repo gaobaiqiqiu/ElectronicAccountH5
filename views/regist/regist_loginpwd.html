@@ -6,176 +6,131 @@
 	<title>设置交易密码</title>
 	<meta http-equiv="Access-Control-Allow-Origin" content="*">
 	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no ,viewport-fit=cover" />
+	<link href="../../css/mui.picker.min.css" rel="stylesheet" />
 	<link href="../../css/mui.css" rel="stylesheet" />
 	<link href="../../css/home.css" rel="stylesheet" />
 	<link rel="stylesheet" href="../../css/microdone-h5.css" />
 	<link rel="stylesheet" href="../../css/demo.css" />
-	<link rel="stylesheet" href="../../css/mobiscroll.custom.min.css">
-	<!--<link href="../../css/bank.css" rel="stylesheet">
-		<link href="../../css/rljf.css" rel="stylesheet">-->
 
 </head>
 <style>
-	/*select {
-    		direction: rtl;
-    		
-		}*/
-		/*select option {
- 		   direction: ltr;
-		}*/
-		select{
-			float: left;
-		}
-		.contentDv{
-			background-color: #ffffff;
-			margin: 0.2rem auto 0;
-		}
-		.professional,
-		.addressType,
-		.address,
-		.use{
-			width: 90%;
-    		height: 3rem;
-    		line-height: 3rem;
-    		position: relative;
-    		border-bottom: 0.1rem solid rgb(243, 237, 237);
-    		margin-left: 1.6rem;
-		}
-		.professional input,
-		.addressType input,
-		.use input{
-			width: 59%;
-			height: 3rem;
-    		padding: 0;
-			margin: 0;
-			background: none;
-			border: 0;
-			text-align: right;
-		}
-		.professional_sp{
-			width: 26%;
-			text-align: left;
-			float: left;
-			/* padding-left: 26px; */
-		}
-		.professional img,
-		.addressType img,
-		.use img{
-			float: right;
-    		height: 2.5rem;
-		}
-		.dw-i{
-			font-size: 1rem;
-		}
-		.dwbc{
-			position: relative;
-    		top: -13rem;
-		}
-		/* .dwbc .dwbw{
-			border: 0.1rem solid rgb(6, 104, 134);
-			border-radius: 1rem;
-		} */
-		.dwbc .dwb-s{
-			float: left;
-		}
-		.dwbc .dwb-c{
-			float: right;
-		}
-		.dwcc{
-			position: relative;
-    		top: 2.5rem;
-		}
-		.professional_inp{
-			height: 3rem;
-			width: 65%;
-			float: left;
-			/* position: relative; */
-		}
-		/* .professional_inp span{
-			height: 100%;
-			width: 80%;
-    		display: block;
-			text-align: right;
-			overflow: hidden;
-		} */
-		.address .professional_inp{
-			height: 3rem;
-			width: 73%;
-			float: right;
-		}
-		.address .professional_inp #addressD{
-			height: 3rem;
-    		padding: 0;
-			margin: 0;
-			background: none;
-			border: 0;
-			text-align: right;
-		}
-		/* .professional_inp img{
-			position: absolute;
-			top: 0.3rem;
-    		right: 0rem;
-    		height: 2.5rem;
-		}
-		.professional_ul{
-			width: 90%;
-			position: absolute;
-			top: 3rem;
-    		right: 2rem;
-			z-index: 100;
-			display: none;
-			background-color: aliceblue;
-		}
-		.professional_ul li{
-			font-family: "微软雅黑"!important;
-			height: 2.5rem;
-    		line-height: 2.5rem;
-			font-weight: 400;
-			color: #000000;
-			padding-right: 0.5rem;
-			border-bottom: 1px solid #ccc;
-			text-align: right;
-		} */
-		/* 交易密码 */
-		/* #tradePwd{
-			text-align: right;
-		} */
-		#loginPwd{
-			text-align: right;
-		}
-		/* 确认密码 */
-		#confirmPwd{
-			text-align: right;
-		}
-		/* 验证码 */
-		#verificationP{
-			padding-left: 1.5rem;
-    		padding-top: 0.5rem;
-    		font-size: 1rem;
-    		display: none;
-		}
-		#verificationP span{
-			color: red;
-		}
-		/* 协议*/
-		.agreementLa{
-			padding-left: 1.3rem;
-   			padding-top: 0.5rem;
-   			padding-bottom: 0.5rem;
-   			font-size: 0.9rem;
-   			display: block;
-		}
-		.agreementLa input{
-			height: 1rem;
-    		width: 1rem;
-		}
-		.agreementLa span{
-			color: red;
-		}
-
-
-
-		
+	select{
+		float: left;
+	}
+	.contentDv{
+		background-color: #ffffff;
+		margin: 0.2rem auto 0;
+	}
+	.professional,
+	.addressType,
+	.address,
+	.use{
+		width: 90%;
+    	height: 3rem;
+    	line-height: 3rem;
+    	position: relative;
+    	border-bottom: 0.1rem solid rgb(243, 237, 237);
+    	margin-left: 1.6rem;
+	}
+	.professional input,
+	.addressType input,
+	.use input{
+		width: 59%;
+		height: 3rem;
+    	padding: 0;
+		margin: 0;
+		background: none;
+		border: 0;
+		text-align: right;
+	}
+	.professional_sp{
+		width: 22%;
+		text-align: left;
+		float: left;
+		/* padding-left: 26px; */
+	}
+	.professional img,
+	.addressType img,
+	.use img{
+		float: right;
+    	height: 2.5rem;
+	}
+	.dw-i{
+		font-size: 1rem;
+	}
+	.dwbc{
+		position: relative;
+    	top: -13rem;
+	}
+	/* .dwbc .dwbw{
+		border: 0.1rem solid rgb(6, 104, 134);
+		border-radius: 1rem;
+	} */
+	.dwbc .dwb-s{
+		float: left;
+	}
+	.dwbc .dwb-c{
+		float: right;
+	}
+	.dwcc{
+		position: relative;
+    	top: 2.5rem;
+	}
+	.professional_inp{
+		height: 3rem;
+		width: 65%;
+		float: left;
+		text-align: right;
+		font-size: 0.9rem;
+		overflow: hidden;
+	}
+	.address .professional_inp{
+		height: 3rem;
+		width: 73%;
+		float: right;
+	}
+	.address .professional_inp #addressD{
+		height: 3rem;
+    	padding: 0;
+		margin: 0;
+		background: none;
+		border: 0;
+		text-align: right;
+	}
+	#loginPwd{
+		text-align: right;
+	}
+	/* 确认密码 */
+	#confirmPwd{
+		text-align: right;
+	}
+	/* 验证码 */
+	#verificationP{
+		padding-left: 1.5rem;
+    	padding-top: 0.5rem;
+    	font-size: 1rem;
+    	display: none;
+	}
+	#verificationP span{
+		color: red;
+	}
+	/* 协议*/
+	.agreementLa{
+		padding-left: 1.3rem;
+   		padding-top: 0.5rem;
+   		padding-bottom: 0.5rem;
+   		font-size: 0.9rem;
+	}
+	.agreementLa input{
+		height: 1rem;
+    	width: 1rem;
+	}
+	.agreementLa .agreementCo{
+		color: red;
+		width: 8rem;
+    	display: inline-block;
+	}
+	
 	</style>
 <script type="text/javascript" src="../../js/controllers/regist/demo.js"></script>
 <script type="text/javascript" src="../../js/controllers/regist/jquery-2.1.4.min.js"></script>
@@ -261,26 +216,24 @@
 		console.log("passGuard1输入框失去焦点");
 	}
 
-	// 提交方法
-	function sb(sb1, sb2) {
-		//判断密码长度
-		if (sb1.getLength() == 0) {
-			alert("密码不能为空！");
-			return false;
-		}
-		if (sb2.getLength() == 0) {
-			alert("密码不能为空！");
-			return false;
-		}
-		if (sb1.getHash() != sb2.getHash()) {
-			alert("新密码和确认密码不一致！");
-			return false;
-		} else {
-			return true;
-		}
-	}
-
-
+	// // 提交方法
+	// function sb(sb1, sb2) {
+	// 	//判断密码长度
+	// 	if (sb1.getLength() == 0) {
+	// 		alert("密码不能为空！");
+	// 		return false;
+	// 	}
+	// 	if (sb2.getLength() == 0) {
+	// 		alert("密码不能为空！");
+	// 		return false;
+	// 	}
+	// 	if (sb1.getHash() != sb2.getHash()) {
+	// 		alert("新密码和确认密码不一致！");
+	// 		return false;
+	// 	} else {
+	// 		return true;
+	// 	}
+	// }
 </script>
 
 <body>
@@ -289,71 +242,31 @@
 		<h1 class="mui-title" style="font-size:1rem">设置交易密码</h1>
 	</header>
 	<div class="mui-content" style="padding-top: 2.85rem;">
-		<div class="contentDv">
-			<!-- 职业 -->
-			<div class="professional">
+		<ul style="background-color: white;">
+			<li class="professional">
 				<label class="professional_sp">职业类型</label>
-				<select id="professional" class="professional_inp">
-					<option value="">请选择</option>
-					<option value="000">国家机关、党群组织、企业、事业单位负责人</option>
-					<option value="100">专业技术人员</option>
-					<option value="300">办事人员和有关人员</option>
-					<option value="400">商业、服务业人员</option>
-					<option value="500">农、林、牧、渔、水利业生产人员</option>
-					<option value="600">生产、运输设备操作人员及有关人员</option>
-					<option value="X00">军人</option>
-					<option value="Y00">不便分类的其他从业人员</option>
-					<option value="Y01">自由职业</option>
-					<option value="Y02">家庭主妇</option>
-					<option value="Y03">学生</option>
-					<option value="Y04">退休</option>
-
-				</select>
-				<img src="../../images/iconbott.png">
-			</div>
-			<!-- 地址类型 -->
-			<div class="addressType">
+				<span class="professional_inp">请选择</span>
+				<img src="../../images/iconbott.png" id="professional">
+			</li>
+			<li class="addressType">
 				<label class="professional_sp">地址类型</label>
-				<select id="addressType" class="professional_inp">
-					<option value="">请选择</option>
-					<option value="10">住宅地址</option>
-					<option value="20">单位地址（外汇专用）</option>
-					<option value="30">联系（通讯）地址</option>
-					<option value="40">综合账单地址</option>
-					<option value="50">信用卡账单地址</option>
-					<option value="60">英文地址</option>
-					<option value="70">住宅地址（信用卡专用）</option>
-					<option value="80">单位地址（信用卡专用）</option>
-					<option value="90">单位全称（信用卡专用）</option>
-					<option value="A0">营业地址</option>
-					<option value="B0">注册地址</option>
-				</select>
-				<img src="../../images/iconbott.png">
-			</div>
-			<!-- 详细地址 -->
-			<div class="address">
+				<span class="professional_inp">请选择</span>
+				<img src="../../images/iconbott.png" id="addressType">
+			</li>
+			<li class="address">
 				<span class="professional_sp">详细地址</span>
 				<div class="professional_inp">
 					<!-- <input id="mobileNo" type="text" class="w30" placeholder="请输入详细地址"> -->
 					<input id="addressD" oninput="if(value.length>60)value=value.slice(0,60)" style="padding-right: 3rem" type="text"
 					 class="w30" placeholder="请输入详细地址">
 				</div>
-			</div>
-			<!-- 用途 -->
-			<div class="use" style="border-bottom:0">
+			</li>
+			<li class="use" style="border-bottom:0">
 				<label class="professional_sp">用途</label>
-				<select id="use" class="professional_inp">
-					<option value="">请选择</option>
-					<option value="4001">代发工资</option>
-					<option value="4002">储蓄</option>
-					<option value="4003">社保医疗</option>
-					<option value="4004">投资理财</option>
-					<option value="4005">偿还贷款</option>
-					<option value="4006">处理日常开支</option>
-				</select>
-				<img src="../../images/iconbott.png">
-			</div>
-		</div>
+				<span class="professional_inp">请选择</span>
+				<img src="../../images/iconbott.png" id="use">
+			</li>
+		</ul>
 		<form class="mui-input-group form_item" style="margin-top: 0.3rem;">
 			<div class="mui-input-row form_list" style="padding-top: 0.3rem;">
 				<label style="padding: 0.5rem 1.5rem;">交易密码</label>
@@ -386,22 +299,21 @@
 			</div>
 		</form>
 		<p id="verificationP">验证码已发送到<span></span>的号码上</p>
-		<label class="agreementLa">
+		<div class="agreementLa">
 			<input type="checkbox" name="items" value="我已阅读并同意" id="clickInp" />
 			<div style="display:inline-block;">我已阅读并同意<span class="agreementCo">《廊坊银行协议》</span></div>
-		</label>
+		</div>
 		<div class="bottom_btn">
 			<button id="nextPage" type="button" class="mui-btn mui-btn-red mui-btn-block">下一步</button>
 		</div>
 	</div>
-	<!-- <i class="iconfont icon-angle-down"></i> -->
 	<script src="../../js/common/immersed.js" type="text/javascript" charset="utf-8"></script>
 	<script src="../../js/common/jquery.js" type="text/javascript" charset="utf-8"></script>
 	<script src="../../js/common/mbank.core.js" type="text/javascript" charset="utf-8"></script>
 	<script src="../../js/mui.min.js"></script>
+	<script src="../../js/controllers/regist/mui.picker.min.js"></script>
 	<script src="../../js/common/check.js" type="text/javascript" charset="utf-8"></script>
 	<script src="../../js/plugin/plugin-idcard.js" type="text/javascript" charset="utf-8"></script>
-	<script src="../../js/controllers/regist/mobiscroll.custom.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="../../js/controllers/regist/regist_loginpwd.js" type="text/javascript" charset="utf-8"></script>
 
 	<script type="text/javascript">
@@ -414,129 +326,6 @@
 				Show = 0;
 			}, 100);
 		};
-
-		var zhiyeeee; //职业的value值
-		var dizhleix; //地址类型的value值
-		var zhhuyotu; //用途的value值
-
-		// 职业
-		$('#professional').mobiscroll().select({
-			theme: 'default',
-			mode: 'scroller',
-			display: 'bottom',
-			lang: 'zh',
-			animate: 'fade',
-			rows: 5,
-			onSelect: function (valueText, inst) {
-				var zylx = [
-					"国家机关、党群组织、企业、事业单位负责人",
-					"专业技术人员",
-					"办事人员和有关人员",
-					"商业、服务业人员",
-					"农、林、牧、渔、水利业生产人员",
-					"生产、运输设备操作人员及有关人员",
-					"军人",
-					"不便分类的其他从业人员",
-					"自由职业",
-					"家庭主妇",
-					"学生",
-					"退休"
-				]
-				var zylx2 = [
-					'000',
-					'100',
-					'300',
-					'400',
-					'500',
-					'600',
-					'X00',
-					'Y00',
-					'Y01',
-					'Y02',
-					'Y03',
-					'Y04'
-				]
-				for (var i = 0; i < zylx.length; i++) {
-					if (zylx[i] == valueText) {
-						zhiyeeee = zylx2[i]
-					}
-				}
-			}
-		});
-		// 地址类型
-		$('#addressType').mobiscroll().select({
-			theme: 'default',
-			mode: 'scroller',
-			display: 'bottom',
-			lang: 'zh',
-			animate: 'fade',
-			rows: 5,
-			onSelect: function (valueText, inst) {
-				var dzlx = [
-					"住宅地址",
-					"单位地址（外汇专用）",
-					"联系（通讯）地址",
-					"综合账单地址",
-					"信用卡账单地址",
-					"英文地址",
-					"住宅地址（信用卡专用）",
-					"单位地址（信用卡专用）",
-					"单位全称（信用卡专用）",
-					"营业地址",
-					"注册地址"
-				]
-				var dzlx2 = [
-					'10',
-					'20',
-					'30',
-					'40',
-					'50',
-					'60',
-					'70',
-					'80',
-					'90',
-					'A0',
-					'B0'
-				]
-				for (var i = 0; i < dzlx.length; i++) {
-					if (dzlx[i] == valueText) {
-						dizhleix = dzlx2[i]
-					}
-				}
-			}
-		});
-		// 用途
-		$('#use').mobiscroll().select({
-			theme: 'default',
-			mode: 'scroller',
-			display: 'bottom',
-			lang: 'zh',
-			animate: 'fade',
-			rows: 5,
-			onSelect: function (valueText, inst) {
-				var yt = [
-					"代发工资",
-					"储蓄",
-					"社保医疗",
-					"投资理财",
-					"偿还贷款",
-					"处理日常开支"
-				]
-				var yt2 = [
-					'4001',
-					'4002',
-					'4003',
-					'4004',
-					'4005',
-					'4006'
-				]
-				for (var i = 0; i < yt.length; i++) {
-					if (yt[i] == valueText) {
-						zhhuyotu = yt2[i]
-					}
-				}
-			}
-		});
 
 	</script>
 	<script type="text/javascript">

@@ -358,7 +358,7 @@
 											"pictureFlowNo3": pictureFlowNo1,
 											"baseStr": checkFace3,
 											"tranType": "0",
-											"currentBusinessCode": '',
+											"currentBusinessCode": '99000006',
 											"accountNo": '',
 											"fileFlowNo": '',
 											"channelCode": '030',
