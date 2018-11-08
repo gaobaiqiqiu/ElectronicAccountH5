@@ -141,7 +141,7 @@
 				console.log()
 				plus.io.resolveLocalFileSystemURL(e, function (entry) {
 					var s = entry.toLocalURL() + "?version=" + new Date().getTime();
-					picZip(s, "authorY", "fileInputName1")
+					picZip(s, "authorY", "filePathName1")
 				}, {
 						filter: "image",
 						multiple: true
@@ -156,7 +156,7 @@
 				console.log()
 				plus.io.resolveLocalFileSystemURL(e, function (entry) {
 					var s = entry.toLocalURL() + "?version=" + new Date().getTime();
-					picZip(s, "authorN ", "fileInputName2")
+					picZip(s, "authorN ", "filePathName2")
 				}, {
 						filter: "image",
 						multiple: true
@@ -171,7 +171,7 @@
 				console.log()
 				plus.io.resolveLocalFileSystemURL(e, function (entry) {
 					var s = entry.toLocalURL() + "?version=" + new Date().getTime();
-					picZip(s, "bankY", "fileInputName4")
+					picZip(s, "bankY", "filePathName4")
 				}, {
 						filter: "image",
 						multiple: true
@@ -224,7 +224,7 @@
 				width: '908px',
 				overwrite: true,
 				format: 'jpg',
-				quality: 100
+				quality: 100 
 			},
 				function (e) {
 					var dUrl = e.target + "?version=" + new Date().getTime();

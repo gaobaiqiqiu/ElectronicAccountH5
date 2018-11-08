@@ -14,7 +14,7 @@
 	"icons": {
 		"72": "icon.png"
 	},
-	"launch_path": "views/regist/regist_loginpwd.html",
+	"launch_path": "views/regist/regist.html",
 	"developer": {
 		"name": "",
 		"email": "",
