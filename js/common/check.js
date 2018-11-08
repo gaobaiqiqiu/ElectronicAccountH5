@@ -623,7 +623,6 @@ function checkphoneSi(phoneObj) {
 		return false;
 	} else if (re.test(phone)) {
 		phoneObj.style.color = "#000";
-		// var phoneObjVa = phoneObj.value;
 		phone = phone.substring(0, 3) + ' ' + phone.substring(3, 7) + ' ' + phone.substring(7, 11);
 		phoneObj.value = phone;
 		return true;

@@ -29,7 +29,7 @@
     	height: 3rem;
     	line-height: 3rem;
     	position: relative;
-    	border-bottom: 0.1rem solid rgb(243, 237, 237);
+    	border-bottom: 0.01rem solid rgb(243, 237, 237);
     	margin-left: 1.6rem;
 	}
 	.professional_sp{
@@ -185,23 +185,23 @@
 	}
 
 	// // 提交方法
-	// function sb(sb1, sb2) {
-	// 	//判断密码长度
-	// 	if (sb1.getLength() == 0) {
-	// 		alert("密码不能为空！");
-	// 		return false;
-	// 	}
-	// 	if (sb2.getLength() == 0) {
-	// 		alert("密码不能为空！");
-	// 		return false;
-	// 	}
-	// 	if (sb1.getHash() != sb2.getHash()) {
-	// 		alert("新密码和确认密码不一致！");
-	// 		return false;
-	// 	} else {
-	// 		return true;
-	// 	}
-	// }
+	function sb(sb1, sb2) {
+		//判断密码长度
+		if (sb1.getLength() == 0) {
+			alert("密码不能为空！");
+			return false;
+		}
+		if (sb2.getLength() == 0) {
+			alert("密码不能为空！");
+			return false;
+		}
+		if (sb1.getHash() != sb2.getHash()) {
+			alert("新密码和确认密码不一致！");
+			return false;
+		} else {
+			return true;
+		}
+	}
 </script>
 
 <body>
@@ -236,8 +236,8 @@
 			</li>
 		</ul>
 		<form class="mui-input-group form_item" style="margin-top: 0.3rem;">
-			<div class="mui-input-row form_list" style="padding-top: 0.3rem;">
-				<label style="padding: 0.5rem 1.5rem;">交易密码</label>
+			<div class="mui-input-row form_list" style="height:3rem; padding-top: 0.3rem;">
+				<label style="padding: 0.9rem 1.5rem;">交易密码</label>
 				<!-- <input id="tradePwd" maxlength="6" readonly="readonly" type="text" class="w30 default NoneInput90" placeholder="6-20位数字和字母组合密码"> -->
 				<input id="loginPwd" maxlength="6" readonly="readonly" type="text" class="w30 default NoneInput90" style="padding-right: 3rem"
 				 placeholder="请输入密码">
@@ -248,8 +248,8 @@
 
 				</script>
 			</div>
-			<div class="mui-input-row form_list" style="padding-top: 0.3rem;">
-				<label style="padding: 0.5rem 1.5rem;">确认密码</label>
+			<div class="mui-input-row form_list" style="height:3rem; padding-top: 0.3rem;">
+				<label style="padding: 0.9rem 1.5rem;">确认密码</label>
 				<input id="confirmPwd" maxlength="6" readonly="readonly" type="text" class="w30  default NoneInput90" style="padding-right: 3rem"
 				 placeholder="请再次输入密码">
 				<script>
@@ -260,8 +260,8 @@
 			</div>
 		</form>
 		<form class="mui-input-group form_item" style="margin-top: 0.2rem;">
-			<div class="mui-input-row form_list" style="padding-top: 0.3rem;">
-				<label style="padding: 0.5rem 1.5rem;">验证码</label>
+			<div class="mui-input-row form_list" style="height:3rem; padding-top: 0.3rem;">
+				<label style="padding: 0.9rem 1.5rem;">验证码</label>
 				<input id="mobileVerifyCode" type="tel" pattern="[0-9]*" maxlength="6" class="vertify_code" />
 				<button type="button" id="vertifyBtn" class="vertify_btn">点击获取验证码</button>
 			</div>

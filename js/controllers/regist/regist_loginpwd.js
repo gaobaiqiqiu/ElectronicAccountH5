@@ -15,12 +15,9 @@
 	var verificationP;  //获取验证码
 	// var mobileNo;
 	var professionalId; //职业
-	var professionalIdJson; //对象
 	var addressTypeId; //地址类型
-	var addressTypeIdJson; //对象
 	var addressD; //详细地址
 	var useId; //用途
-	var useIdJson; //对象
 	var agreementCo; //协议
 
 	// var mobileVerifyCode;  
@@ -44,8 +41,6 @@
 	var yanzmals;  //手机验证码流水
 	var jiaoymma;  //校验密码
 
-	var sb;
-
 	//初始化页面
 	regist_loginpwd.init = function () {
 		console.log("regist_loginpwd 加载成功！");
@@ -66,34 +61,22 @@
 		if (shjihaom != undefined) {
 			shjihaom = shjihaom.replace(/\s+/g, "");
 		}
-
-		// 提交方法
-		sb = function sb(sb1, sb2) {
-			//判断密码长度
-			if (sb1.getLength() == 0) {
-				alert("密码不能为空！");
-				return false;
-			}
-			if (sb2.getLength() == 0) {
-				alert("密码不能为空！");
-				return false;
-			}
-			if (sb1.getHash() != sb2.getHash()) {
-				alert("新密码和确认密码不一致！");
-				return false;
-			} else {
-				return true;
-			}
-		}
 		compareResult = self.compareResult; //相似度的对比
-
 		srandNum = stringSrand();
+		// 交易密码
+		loginPwd = document.getElementById("loginPwd");
+		if(loginPwd != undefined){
+			loginPwd.value = "";
+		}
+		// 确认密码
+		confirmPwd = document.getElementById("confirmPwd");
+		if(confirmPwd != undefined){
+			confirmPwd.value = "";
+		}
 	};
 
 	//页面控件事件绑定
 	regist_loginpwd.initController = function () {
-		loginPwd = document.getElementById("loginPwd");
-		confirmPwd = document.getElementById("confirmPwd");
 		verificationP = document.getElementById("verificationP");
 		// 复选框
 		inputCheck = document.querySelector('#clickInp');
@@ -125,9 +108,9 @@
 		types[plus.networkinfo.CONNECTION_CELL3G] = "蜂窝移动3G";
 		types[plus.networkinfo.CONNECTION_CELL4G] = "蜂窝移动4G";
 		var deviceModel = plus.os.name;
-		var deviceOS = plus.os.version;
-		var netWorking = plus.networkinfo.getCurrentType();
-		var deviceName = plus.device.model;
+		// var deviceOS = plus.os.version;
+		// var netWorking = plus.networkinfo.getCurrentType();
+		// var deviceName = plus.device.model;
 		//设备id
 		if (deviceModel == "iOS") {
 			uuID = plus.device.uuid;
@@ -263,7 +246,6 @@
 				plus.nativeUI.toast("未同意协议");
 				return false;
 			}
-			console.log(zhiyeeee, +"----," + dizhleix + "----," + addressD)
 			// 职业类型
 			if (zhiyeeee == undefined) {
 				plus.nativeUI.toast("请选择职业类型");
@@ -310,10 +292,10 @@
 								return false;
 							} else {
 								if (checknull(yanzhema, "验证码")) {
-									if (sb.sb(passGuard1, passGuard2)) {
+									if (sb(passGuard1, passGuard2)) {
 										//只能调一次，再次调用passGuard1.getLength()的值为0，会弹出提示：密码不能为空！
 										jiaoymma = passGuard1.getOutput();
-
+ 
 										// 开户
 										var reqData = {
 											"zhjnzlei": "10",
