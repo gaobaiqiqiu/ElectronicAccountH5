@@ -15,7 +15,7 @@
 	var uuID;
 	var fileInputName;
 	var baseStr;
-	var imgWidth;
+	var imgWidth;  //身份证、银行卡的照片
 	var bitmap = null;
 	var OCRflag;
 
@@ -37,6 +37,7 @@
 		self = plus.webview.currentWebview();
 		plus.navigator.setStatusBarStyle('dark'); //状态栏
 		imgWidth = jQuery(".upload_img").innerWidth();
+		console.log(imgWidth)
 		jQuery(".upload_img").height(imgWidth / 1.6);
 	};
 
@@ -46,8 +47,8 @@
 		bitmap = new plus.nativeObj.Bitmap("test");
 		userName = document.getElementById("userName");
 		certNo = document.getElementById("certNo");
-		endDate = document.getElementById("endDate");
 		startDate = document.getElementById("startDate");
+		endDate = document.getElementById("endDate");
 		accountNo = document.getElementById("accountNo");
 		shjihaom = document.getElementById('mobileNo');
 		if (plus.os.name == "iOS") {
@@ -224,7 +225,7 @@
 				width: '908px',
 				overwrite: true,
 				format: 'jpg',
-				quality: 100 
+				quality: 100
 			},
 				function (e) {
 					var dUrl = e.target + "?version=" + new Date().getTime();
@@ -327,12 +328,12 @@
 			//校验身份证
 			if (checkUserName(userName.value)) {
 				if (isCardID(certNo.value)) {
-					if(checkLength(startDate, '证件起始日:', 8)){
-						if(checkLengthEnd(startDate, endDate,"证件到期日",8)){
+					if (checkLength(startDate, '证件起始日:', 8)) {
+						if (checkLengthEnd(startDate, endDate, "证件到期日", 8)) {
 							if (checknull(accountNo, "绑定卡号")) {
 								if (checkphoneSi(shjihaom)) {
-									accountNo.value = accountNo.value.replace(/\s+/g,"");
-									shjihaom.value = shjihaom.value.replace(/\s+/g,"");
+									accountNo.value = accountNo.value.replace(/\s+/g, "");
+									shjihaom.value = shjihaom.value.replace(/\s+/g, "");
 									//鉴权								
 									var reqData = {
 										"zhjnzlei": "10",
@@ -350,22 +351,30 @@
 									};
 									apiSend('post', 'eleAccCheckUserInfoForMobile.do', reqData, returnFl, returnFail, true);
 									function returnFl(data) {
-										returnFlag = data.returnFlag;
-										// 下一页
-										var reqData = {
-											"pictureFlowNo1": pictureFlowNo1,
-											"pictureFlowNo2": pictureFlowNo1,
-											"pictureFlowNo3": pictureFlowNo1,
-											"baseStr": checkFace3,
-											"tranType": "0",
-											"currentBusinessCode": '99000006',
-											"accountNo": '',
-											"fileFlowNo": '',
-											"channelCode": '030',
-											"certNo": certNo.value,
-											"userName": userName.value
+										if (data.ec != 0000) {
+											plus.nativeUI.toast(data.errorMsg);
+										} else {
+											returnFlag = data.returnFlag;
+											// 下一页
+											var reqData = {
+												"pictureFlowNo1": pictureFlowNo1,
+												"pictureFlowNo2": pictureFlowNo1,
+												"pictureFlowNo3": pictureFlowNo1,
+												"baseStr": checkFace3,
+												"tranType": "0",
+												"currentBusinessCode": '99000006',
+												"accountNo": accountNo.value,
+												"fileFlowNo": '',
+												"channelCode": '030',
+												"certNo": certNo.value,
+												"userName": userName.value,
+												"beginDate": startDate.value,
+												"endDate": endDate.value,
+												"mobileNo": shjihaom.value
+											}
+											apiSend('post', 'eleAccAppOnlineCheck.do', reqData, faceFun, null, true);
 										}
-										apiSend('post', 'eleAccAppOnlineCheck.do', reqData, faceFun, null, true);
+
 									}
 									function returnFail() {
 										plus.nativeUI.toast("鉴权失败");
@@ -382,7 +391,7 @@
 					// 			if (time1GreaterThanTime2(startDate.value, endDate.value)) {
 					// 				plus.nativeUI.toast("证件起始日不能大于或等于证件到期日");
 					// 			} else {
-									
+
 					// 			}
 					// 		} else {
 					// 			plus.nativeUI.toast("证件已过期！");

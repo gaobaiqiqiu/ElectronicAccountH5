@@ -1,20 +1,27 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!doctype html>
 <html>
 <head>
 	<meta charset="UTF-8">
 	<title>注册</title>
 	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no ,viewport-fit=cover" />
-	<link href="../../css/mui.css" rel="stylesheet" />
-	<link href="../../css/home.css" rel="stylesheet" />
-	<link rel="stylesheet" href="../../css/microdone-h5.css" />
-	<link rel="stylesheet" href="../../css/demo.css" />
+	<link href="http://60.10.20.15:86/elapp/css/mui.css" rel="stylesheet" />
+	<link href="http://60.10.20.15:86/elapp/css/home.css" rel="stylesheet" />
+	<link rel="stylesheet" href="http://60.10.20.15:86/elapp/css/microdone-h5.css" />
+	<link rel="stylesheet" href="http://60.10.20.15:86/elapp/css/demo.css" />
 	<link rel="stylesheet" href="http://at.alicdn.com/t/font_889368_kzv7sb7gih.css">
+	<script src="http://60.10.20.15:86/elapp/js/common/immersed.js" type="text/javascript" charset="utf-8"></script>
+	<script src="http://60.10.20.15:86/elapp/js/common/jquery.js" type="text/javascript" charset="utf-8"></script>
+	<script src="http://60.10.20.15:86/elapp/js/common/mbank.core.js" type="text/javascript" charset="utf-8"></script>
+	<script src="http://60.10.20.15:86/elapp/js/mui.min.js"></script>
+	<script src="http://60.10.20.15:86/elapp/js/common/check.js" type="text/javascript" charset="utf-8"></script>
+	<script src="http://60.10.20.15:86/elapp/js/plugin/plugin-idcard.js" type="text/javascript" charset="utf-8"></script>
+	<script src="http://60.10.20.15:86/elapp/js/controllers/regist/regist.js" type="text/javascript" charset="utf-8"></script>
 	<style type="text/css">
 		.form_item {
 			margin-top: 0.1rem;
 			padding: 0.3rem 1rem 0 1rem;
 		}
-
 		.form_item_botton {
 			padding: 0 25px;
 		}
@@ -67,7 +74,7 @@
 		.upload_img {
 			width: 100%;
 			height: 3.7rem;
-			background: #FBFBFB url(../../images/card1.png) no-repeat center center;
+			background: #FBFBFB url(http://60.10.20.15:86/elapp/images/card1.png) no-repeat center center;
 			background-size: 50%;
 			border-radius: 5px;
 			text-align: center;
@@ -75,17 +82,17 @@
 		}
 
 		.upload_img2 {
-			background: #FBFBFB url(../../images/card2.png) no-repeat center center;
+			background: #FBFBFB url(http://60.10.20.15:86/elapp/images/card2.png) no-repeat center center;
 			background-size: 50%;
 		}
 
 		.upload_img3 {
-			background: #FBFBFB url(../../images/card3.png) no-repeat center center;
+			background: #FBFBFB url(http://60.10.20.15:86/elapp/images/card3.png) no-repeat center center;
 			background-size: 50%;
 		}
 
 		.upload_img4 {
-			background: #FBFBFB url(../../images/card4.png) no-repeat center center;
+			background: #FBFBFB url(http://60.10.20.15:86/elapp/images/card4.png) no-repeat center center;
 			background-size: 50%;
 		}
 
@@ -131,7 +138,11 @@
 </head>
 
 <body>
-	
+	<%
+	    String custNamejie = (String)request.getSession().getAttribute("custNamejie");
+	    String idNojie = (String)request.getSession().getAttribute("idNojie");
+	    String urljie = (String)request.getSession().getAttribute("urljie");
+	%>
 	<header class="mui-bar mui-bar-nav statusbar">
 		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 		<h1 class="mui-title">注册</h1>
@@ -170,13 +181,13 @@
 			<div class="mui-input-row form_list">
 				<label>姓名</label>
 				<!-- <input id="userName" oninput="if(value.length>50)value=value.slice(0,50)" type="text" class="w30" placeholder="请输入您的真实姓名"> -->
-				<textarea id="userName" oninput="if(value.length>50)value=value.slice(0,50)" wrap="hard" placeholder="请输入您的真实姓名"></textarea>
+				<textarea id="userName" oninput="if(value.length>50)value=value.slice(0,50)" wrap="hard" placeholder="请输入您的真实姓名"><%=custNamejie%></textarea>
 				<!--<span class="mui-icon mui-icon-camera scanicon" id="scanUserName"></span>-->
 			</div>
 			<div class="mui-input-row form_list">
 				<label>身份证号</label>
 				<div class="form_list_right">
-					<input id="certNo" oninput="if(value.length>18)value=value.slice(0,18)" type="number" class="w30" placeholder="请输入您的身份证号码">
+					<input id="certNo" oninput="if(value.length>18)value=value.slice(0,18)" type="number" class="w30" placeholder="请输入您的身份证号码"><%=idNojie%></input>
 					<!--<span class="mui-icon mui-icon-camera scanicon" id="scanCertNo"></span>-->
 				</div>
 			</div>
@@ -207,17 +218,10 @@
 			</div>
 		</div>
 	</div>
-
+  <input id="urljie" type="hidden"><%=urljie%></input>
 	<div class="bottom_btn">
 		<button id="nextPage" type="button" class="mui-btn mui-btn-red mui-btn-block" style="font-size: 0.6rem;">下一步</button>
 	</div>
-	<script src="../../js/common/immersed.js" type="text/javascript" charset="utf-8"></script>
-	<script src="../../js/common/jquery.js" type="text/javascript" charset="utf-8"></script>
-	<script src="../../js/common/mbank.core.js" type="text/javascript" charset="utf-8"></script>
-	<script src="../../js/mui.min.js"></script>
-	<script src="../../js/common/check.js" type="text/javascript" charset="utf-8"></script>
-	<script src="../../js/plugin/plugin-idcard.js" type="text/javascript" charset="utf-8"></script>
-	<script src="../../js/controllers/regist/regist.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript">
 		/*控制页面的高度*/
 		document.documentElement.style.fontSize = innerWidth / 16 + 'px';

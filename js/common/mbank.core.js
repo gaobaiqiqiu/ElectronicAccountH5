@@ -1,6 +1,6 @@
 //var serverPath = "http://176.16.55.33:9083/eleapp/";
 //var serverPath = "http://176.16.55.33:9084/eleapp/";
-var serverPath = "http://60.10.20.25:86/elapp/"; //SIT地址
+var serverPath = "http://60.10.20.15:86/elapp/"; //SIT地址
 //var serverPath = "http://60.10.20.15:86/eleapp/"; //UAT地址
 //var serverPath = "https://60.10.20.15:88/eleapp/"; //准生产地址
 //var serverPath = "http://60.10.20.25:86/eleappZSC/";//内侧准生产

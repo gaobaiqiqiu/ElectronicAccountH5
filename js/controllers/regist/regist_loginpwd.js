@@ -63,6 +63,11 @@
 		}
 		compareResult = self.compareResult; //相似度的对比
 		srandNum = stringSrand();
+		// 详细地址
+		addressD = document.getElementById("addressD");
+		if(addressD != undefined){
+			addressD.value = "";
+		}
 		// 交易密码
 		loginPwd = document.getElementById("loginPwd");
 		if(loginPwd != undefined){
@@ -73,6 +78,11 @@
 		if(confirmPwd != undefined){
 			confirmPwd.value = "";
 		}
+		// 获取验证码
+		vertifyBtn = document.getElementById("vertifyBtn");
+		if(vertifyBtn != undefined){
+			vertifyBtn.value = "";
+		}
 	};
 
 	//页面控件事件绑定
@@ -80,16 +90,12 @@
 		verificationP = document.getElementById("verificationP");
 		// 复选框
 		inputCheck = document.querySelector('#clickInp');
-		// 获取验证码
-		vertifyBtn = document.getElementById("vertifyBtn");
-
+		
 		// 职业
 		professionalId = document.querySelector('.professional span')
-		// console.log(professionalId.value)
 		//地址类型
 		addressTypeId = document.querySelector('.addressType span')
-		// 详细地址
-		addressD = document.getElementById("addressD");
+
 		// 用途
 		useId = document.querySelector('.use span')
 
